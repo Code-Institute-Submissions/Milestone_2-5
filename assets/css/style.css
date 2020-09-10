@@ -1,0 +1,44 @@
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+/*----Navigation----*/
+.navbar-brand{
+  font-family: 'Megrim', cursive;
+  font-size: 3em;
+  padding: 5px;
+}
+.navbar-dark .navbar-brand{
+color:#3f95c3;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+color:#3f95c3;
+}
+.navbar-brand img{
+  margin-left:20px;
+}
+.nav-item{
+  font-family: 'Megrim', cursive;
+  font-size: 1.5em;
+  margin-left:30px;
+}
+.bg-dark {
+    border-bottom: 4px solid #3f95c3;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+/*source: https://codepen.io/pant0ne/pen/KRbGvy*/
+/*----footer----*/
+footer{
+  border-top: solid 2px #3f95c3; 
+}
+footer img{
+  width:50px;
+  height:50px;
+  margin:10px;
+}
+.copyright p{
+ text-align: end;
+}
