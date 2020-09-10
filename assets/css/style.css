@@ -72,3 +72,9 @@ footer img{
 .copyright p{
  text-align: end;
 }
+/*----map----*/
+div#map {
+  min-height: 1000px;
+  margin:40px;
+  border:solid 2px #3f95c3;
+  }
