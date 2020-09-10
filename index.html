@@ -49,6 +49,74 @@
   </div>
 </section>
 <section class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col"  id="search">
+      <h2>Plan your visit</h2>
+    </div>
+  </div>
+  <div class="row no-gutters search-criteria">
+    <div class="col">
+      <h4>1. Pick a region:</h4>
+      <!--<input type="text" name="search" placeholder="Search..">-->
+        <select class="mdb-select md-form" searchable="Search here..">
+          <option value="" disabled selected>Choose a region...</option>
+          <option value="1">USA</option>
+          <option value="2">Germany</option>
+          <option value="3">France</option>
+          <option value="3">Poland</option>
+          <option value="3">Japan</option>
+        </select>
+<!--source:https://mdbootstrap.com/snippets/jquery/mdbootstrap/921549#html-tab-view-->
+
+    </div>
+    <div class="col">
+      <h4>2. Pick a country:</h4>
+      <select class="mdb-select md-form" searchable="Search here..">
+          <option value="" disabled selected>Choose a country...</option>
+          <option value="1">USA</option>
+          <option value="2">Germany</option>
+          <option value="3">France</option>
+          <option value="3">Poland</option>
+          <option value="3">Japan</option>
+        </select>
+      <!--<input type="text" name="search" placeholder="Search..">-->
+    </div>
+    <div class="col-sm">
+      <h4>3. Pick a category:</h4>
+      <!----checkboxes from https://www.w3schools.com/howto/howto_css_custom_checkbox.asp---->
+      <label class="container">Natural site
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Cultural site
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Mixed site
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+    </div>
+  </div>
+  <div class="row no-gutters search-criteria">
+    <div class="col-sm">
+      <h4>Or search by site:</h4>
+      <!--<input type="text" name="search" placeholder="Search.." class="field">-->
+      <select class="mdb-select md-form" searchable="Search here..">
+          <option value="" disabled selected>Choose a site...</option>
+          <option value="1">USA</option>
+          <option value="2">Germany</option>
+          <option value="3">France</option>
+          <option value="3">Poland</option>
+          <option value="3">Japan</option>
+        </select>
+    </div>
+  </div>
+    <div class="row no-gutters"id="button-container">
+      <button type="button" class="btn btn-primary">Search</button>
+    </div>
+</section>
+<section class="container-fluid">
   <div id="map">
   </div>
 </section>
