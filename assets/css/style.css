@@ -30,6 +30,36 @@ color:#3f95c3;
     border-bottom-right-radius: 5px;
 }
 /*source: https://codepen.io/pant0ne/pen/KRbGvy*/
+/*----body----*/
+body{
+  font-family:'Cairo', sans-serif;
+}
+#intro{
+  font-size:1.25em;
+  justify-content:center;
+}
+.image-container{
+  text-align:center;
+}
+#intro-image{
+  max-height: 700px;
+  max-width: 480px;
+  margin:80px;
+  border: solid 2px #3f95c3;
+}
+#intro-text-title {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.text-container{
+  margin: 80px;
+  text-align:center;
+}
+#unesco-image{
+  width:300px;
+  height:300px;
+}
 /*----footer----*/
 footer{
   border-top: solid 2px #3f95c3; 
