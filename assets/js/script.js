@@ -27,3 +27,12 @@ function initMap() {
         });
     });
 }
+var xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("data").innerHTML = this.responseText;
+    }
+};
+xhr.open("GET", "https://cors-anywhere.herokuapp.com/https://whc.unesco.org/en/list/xml/");
+xhr.send();
