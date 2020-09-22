@@ -27,18 +27,8 @@ function initMap() {
         });
     });
 }
-// var xhr = new XMLHttpRequest();
 
-// xhr.onreadystatechange = function() {
-//     if (this.readyState == 4 && this.status == 200) {
-//         document.getElementById("data").innerHTML = this.responseText;
-//     }
-// };
-// xhr.open("GET", "https://whc.unesco.org/en/list/xml/");
-// xhr.send();
-
-/**
- * Changes XML to JSON
+ /* Changes XML to JSON
  * Modified version from here: http://davidwalsh.name/convert-xml-json
  * @param {string} xml XML DOM tree
  */
@@ -93,12 +83,10 @@ function xmlToJson(xml) {
 // Lowdb code example
 // See https://github.com/typicode/lowdb
 // 
-
-// LocalStorage is a lowdb adapter for saving to localStorage
-const adapter = new LocalStorage('db')
+const adapter = new LocalStorage('db');
 
 // Create database instance
-const db = low(adapter)
+const db = low(adapter);
 
 ENTITY_ID = 'items';
 
@@ -109,12 +97,12 @@ ENTITY_ID = 'items';
 function add() {
   db.get(ENTITY_ID)
     .push({ time: Date.now() })
-    .write()
+    .write();
 }
 
 function reset() {
   db.set(ENTITY_ID, [])
-    .write()
+    .write();
 }
 
 function clearState() {
@@ -139,6 +127,6 @@ if (_.isEmpty(state)) {
     });
 }
 
-console.log(find('Natural'));
+const result = state.items.filter(state => state.category === "Natural");
 
-
+console.log(result);
