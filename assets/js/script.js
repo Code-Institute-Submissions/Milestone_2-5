@@ -1,3 +1,123 @@
+
+/* XML to JSON conversion
+* Modified version from here: http://davidwalsh.name/convert-xml-json
+* @param {string} xml XML DOM tree
+*/
+function xmlToJson(xml) {
+    var obj = {};
+
+    if (xml.nodeType == 1) {
+
+        if (xml.attributes.length > 0) {
+            obj["@attributes"] = {};
+            for (var j = 0; j < xml.attributes.length; j++) {
+                var attribute = xml.attributes.item(j);
+                obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+            }
+        }
+    } else if (xml.nodeType == 3) {
+        obj = xml.nodeValue;
+    }
+    var textNodes = [].slice.call(xml.childNodes).filter(function (node) {
+        return node.nodeType === 3;
+    });
+    if (xml.hasChildNodes() && xml.childNodes.length === textNodes.length) {
+        obj = [].slice.call(xml.childNodes).reduce(function (text, node) {
+            return text + node.nodeValue;
+        }, "");
+    } else if (xml.hasChildNodes()) {
+        for (var i = 0; i < xml.childNodes.length; i++) {
+            var item = xml.childNodes.item(i);
+            var nodeName = item.nodeName;
+            if (typeof obj[nodeName] == "undefined") {
+                obj[nodeName] = xmlToJson(item);
+            } else {
+                if (typeof obj[nodeName].push == "undefined") {
+                    var old = obj[nodeName];
+                    obj[nodeName] = [];
+                    obj[nodeName].push(old);
+                }
+                obj[nodeName].push(xmlToJson(item));
+            }
+        }
+    }
+    return obj;
+}
+
+// Lowdb code example
+// See https://github.com/typicode/lowdb
+
+const adapter = new LocalStorage('db');
+
+const db = low(adapter);
+
+ENTITY_ID = 'items';
+
+// Set default state
+// db.defaults({ items: [] })
+//   .write()
+
+function add() {
+    db.get(ENTITY_ID)
+        .push({ time: Date.now() })
+        .write();
+}
+function reset() {
+    db.set(ENTITY_ID, [])
+        .write();
+}
+function clearState() {
+    db.setState({});
+}
+function find(query) {
+    return db.get(ENTITY_ID).find(query).value();
+}
+console.log(db.getState());
+
+const state = db.getState();
+
+if (_.isEmpty(state)) {
+    $.ajax({
+        url: "https://cors-anywhere.herokuapp.com/https://whc.unesco.org/en/list/xml/"
+    }).done((response) => {
+        const data = xmlToJson(response);
+        console.log(data);
+        db.defaults({ items: data.query.row }).write();
+    });
+}
+
+const regions = state.items.slice(state => state.region);
+console.log(regions);
+
+const states =  state.items.slice(state => state.states);
+console.log(states);
+
+const naturalSites = state.items.filter(state => state.category === "Natural");
+const culturalSites = state.items.filter(state => state.category === "Cultural");
+const mixedSites = state.items.filter(state => state.category === "Mixed");
+
+function addCategoryNatural() {
+    if (document.getElementById("natural").checked == true) {
+        document.load(naturalSites);
+    }
+    else {
+        document.getElementById("natural").checked == false
+    }
+};
+addCategoryNatural();
+
+function addCategoryCultural() {
+    if (document.getElementById("cultural").checked == true) {
+        document.load(culturalSites);
+    }
+    else {
+        document.getElementById("cultural").checked == false
+    }
+};
+addCategoryCultural();
+
+// Google maps
+
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 3,
@@ -15,9 +135,7 @@ function initMap() {
     }, {
         lat: 41.084045,
         lng: -73.874256
-    }, {
-        lat: 40.754932,
-        lng: -73.984016
+
     }];
 
     var markers = locations.map(function (location, i) {
@@ -26,107 +144,7 @@ function initMap() {
             label: labels[i % labels.length]
         });
     });
-}
-
- /* Changes XML to JSON
- * Modified version from here: http://davidwalsh.name/convert-xml-json
- * @param {string} xml XML DOM tree
- */
-function xmlToJson(xml) {
-  // Create the return object
-  var obj = {};
-
-  if (xml.nodeType == 1) {
-    // element
-    // do attributes
-    if (xml.attributes.length > 0) {
-      obj["@attributes"] = {};
-      for (var j = 0; j < xml.attributes.length; j++) {
-        var attribute = xml.attributes.item(j);
-        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
-      }
-    }
-  } else if (xml.nodeType == 3) {
-    // text
-    obj = xml.nodeValue;
-  }
-
-  // do children
-  // If all text nodes inside, get concatenated text from them.
-  var textNodes = [].slice.call(xml.childNodes).filter(function(node) {
-    return node.nodeType === 3;
-  });
-  if (xml.hasChildNodes() && xml.childNodes.length === textNodes.length) {
-    obj = [].slice.call(xml.childNodes).reduce(function(text, node) {
-      return text + node.nodeValue;
-    }, "");
-  } else if (xml.hasChildNodes()) {
-    for (var i = 0; i < xml.childNodes.length; i++) {
-      var item = xml.childNodes.item(i);
-      var nodeName = item.nodeName;
-      if (typeof obj[nodeName] == "undefined") {
-        obj[nodeName] = xmlToJson(item);
-      } else {
-        if (typeof obj[nodeName].push == "undefined") {
-          var old = obj[nodeName];
-          obj[nodeName] = [];
-          obj[nodeName].push(old);
-        }
-        obj[nodeName].push(xmlToJson(item));
-      }
-    }
-  }
-  return obj;
-}
-
-//
-// Lowdb code example
-// See https://github.com/typicode/lowdb
-// 
-const adapter = new LocalStorage('db');
-
-// Create database instance
-const db = low(adapter);
-
-ENTITY_ID = 'items';
-
-// Set default state
-// db.defaults({ items: [] })
-//   .write()
-
-function add() {
-  db.get(ENTITY_ID)
-    .push({ time: Date.now() })
-    .write();
-}
-
-function reset() {
-  db.set(ENTITY_ID, [])
-    .write();
-}
-
-function clearState() {
-    db.setState({});
-}
-
-function find(query) {
-    return db.get(ENTITY_ID).find(query).value();
-}
-
-console.log(db.getState());
-
-const state = db.getState();
-
-if (_.isEmpty(state)) {
-    $.ajax({
-        url: "https://cors-anywhere.herokuapp.com/https://whc.unesco.org/en/list/xml/"
-    }).done((response) => {
-        const data = xmlToJson(response);
-        console.log(data);
-        db.defaults({ items: data.query.row }).write();
+var markerCluster = new MarkerClusterer(map, markers, {
+        imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
 }
-
-const result = state.items.filter(state => state.category === "Natural");
-
-console.log(result);
