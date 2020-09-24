@@ -74,9 +74,9 @@ function find(query) {
 }
 console.log(db.getState());
 
-const state = db.getState();
+const myData = db.getState();
 
-if (_.isEmpty(state)) {
+if (_.isEmpty(myData)) {
     $.ajax({
         url: "https://cors-anywhere.herokuapp.com/https://whc.unesco.org/en/list/xml/"
     }).done((response) => {
@@ -86,17 +86,19 @@ if (_.isEmpty(state)) {
     });
 }
 
-const regions = state.items.slice(state => state.region);
-console.log(regions);
+var sitesList = document.getElementById('sites');
+sitesList.innerHTML = myData.items.site;
+// console.log(sitesList);
+console.log(myData.items[0].site);
 
-const states =  state.items.slice(state => state.states);
-console.log(states);
+//You might need to loop through every index and check for the search parameter in the 'site' value
 
-const naturalSites = state.items.filter(state => state.category === "Natural");
-const culturalSites = state.items.filter(state => state.category === "Cultural");
-const mixedSites = state.items.filter(state => state.category === "Mixed");
 
-function addCategoryNatural() {
+const naturalSites = myData.items.filter(myData => myData.category === "Natural");
+const culturalSites = myData.items.filter(myData => myData.category === "Cultural");
+const mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
+
+/*function addCategoryNatural() {
     if (document.getElementById("natural").checked == true) {
         document.load(naturalSites);
     }
@@ -114,7 +116,9 @@ function addCategoryCultural() {
         document.getElementById("cultural").checked == false
     }
 };
-addCategoryCultural();
+addCategoryCultural();*/
+
+
 
 // Google maps
 
