@@ -69,21 +69,19 @@ body{
 .search-criteria{
   background-color: aliceblue;
   margin:0 40px;
+  padding-bottom:20px;
   text-align:center;
 }
 
-/* https://www.w3schools.com/howto/howto_css_animated_search.asp */
 .mdb-select.md-form{
-  width: 200px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
+  width: 100%;
   border: solid 2px #3f95c3;
   border-radius: 5px;
 }
-
-.mdb-select.md-form:focus{
-  width: 100%;
+.field{
+  width: 50%;
   border: solid 2px #3f95c3;
+  border-radius: 5px;
 }
 #button-container{
   justify-content:center;
