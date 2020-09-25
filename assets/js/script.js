@@ -87,11 +87,20 @@ if (_.isEmpty(myData)) {
 }
 
 var sitesList = document.getElementById('sites');
-sitesList.innerHTML = myData.items.site;
-// console.log(sitesList);
+sites.innerHTML = myData.items[0].site;
 console.log(myData.items[0].site);
 
-//You might need to loop through every index and check for the search parameter in the 'site' value
+for (var i; i < myData.items.length; i++){
+console.log(myData.items[i]);
+}
+
+var options;
+for (options in myData.items){
+    
+}
+
+
+
 
 
 const naturalSites = myData.items.filter(myData => myData.category === "Natural");
