@@ -87,8 +87,15 @@
 
 		        <div class="col-sm">
 		            <h4>2. Pick a category:</h4>
+                    <form action="/action_page.php">
+                        <input type="checkbox" name="Natural_sites" id="natural" onclick="addCategoryToNatural()">Natural sites<br>
+                        <input type="checkbox" name="Cultural_sites" id="cultural" onclick="addCategoryToCultural()">Cultural sites<br>
+                        <input type="checkbox" name="Mixed_sites" id="mixed"onclick="addCategoryToMixed()">Mixed Sites<br>
+                    </form>
+		        </div>
+                <!---https://www.w3schools.com/jsref/prop_checkbox_checked.asp-->
 
-			        <label class="container">Natural site
+			        <!--<label class="container">Natural site
                         <input  id="natural" type="checkbox">
                         <span class="checkmark"></span>
                      </label>
@@ -100,21 +107,13 @@
                         <input  id="mixed" type="checkbox">
                         <span class="checkmark"></span>
                     </label>
-		        </div>
+		        </div>*/
                 <!----checkboxes from https://www.w3schools.com/howto/howto_css_custom_checkbox.asp---->
+
                 
 			</div>
 			<div class="row no-gutters" id="button-container">
 				<button type="button" class="btn btn-primary">Show on map</button>
-			</div>
-			<div class="row no-gutters search-criteria">
-				<div class="col-sm ">
-					<h4>Or search by site:</h4>
-					<input type="text" name="search" placeholder="Search.." class="field" id="sites">
-                </div>
-		    </div>
-		   <div class="row no-gutters" id="button-container">
-				<button type="button" class="btn btn-primary">Search</button>
 			</div>
 		</section>
 		<section class="container-fluid">

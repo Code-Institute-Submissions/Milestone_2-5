@@ -86,50 +86,58 @@ if (_.isEmpty(myData)) {
     });
 }
 
-var sitesList = document.getElementById('sites');
-sites.innerHTML = myData.items[0].site;
-console.log(myData.items[0].site);
+//---Adding data to region search
 
-for (var i; i < myData.items.length; i++){
-console.log(myData.items[i]);
-}
+var Africa = myData.items.filter(myData=> myData.region === "Africa" );
+var Arab = myData.items.filter(myData=> myData.region === "Arab States" );
+var Asia = myData.items.filter(myData=> myData.region === "Asia" );
+var EuNa = myData.items.filter(myData=> myData.region === "Europe and North America" );
+var EuNaAsPaLaCa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific,Latin America and the Caribbean" );
+var EuNaAsPa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific" );
+var LaCa = myData.items.filter(myData=> myData.region === "Latin America and the Caribbean" );
 
-var options;
-for (options in myData.items){
-    
-}
+//var sitesList = document.getElementById('sites');
+//sites.innerHTML = myData.items[0].site;
+//console.log(myData.items[0].site);
 
 
-
-
+//---Checkbox functionality
 
 const naturalSites = myData.items.filter(myData => myData.category === "Natural");
 const culturalSites = myData.items.filter(myData => myData.category === "Cultural");
 const mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
 
-/*function addCategoryNatural() {
-    if (document.getElementById("natural").checked == true) {
-        document.load(naturalSites);
+
+function addCategoryToNatural() {
+    if (document.getElementById("natural").checked = true) {
+        naturalSites;
     }
     else {
-        document.getElementById("natural").checked == false
     }
 };
-addCategoryNatural();
+addCategoryToNatural();
 
-function addCategoryCultural() {
-    if (document.getElementById("cultural").checked == true) {
-        document.load(culturalSites);
+function addCategoryToCultural() {
+    if (document.getElementById("cultural").checked = true) {
     }
     else {
-        document.getElementById("cultural").checked == false
     }
 };
-addCategoryCultural();*/
+addCategoryToCultural();
+
+function addCategoryToMixed() {
+    if (document.getElementById("mixed").checked = true) {
+    }
+    else {
+    }
+};
+addCategoryToMixed();
 
 
 
-// Google maps
+
+
+//---Google maps
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
