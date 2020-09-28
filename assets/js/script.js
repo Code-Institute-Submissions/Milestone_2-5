@@ -153,7 +153,7 @@ function initMap() {
         }
     });
 
-    var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  //----markers
 
     var locations = [];
 
@@ -165,21 +165,36 @@ function initMap() {
         }
         locations.push(this_location);
     };
-    var image ="https://img.icons8.com/nolan/64/unesco.png";
+    
+    //var contentString = {}
+    //var this_markerContent= {};
+    //for (var i=0; i<myData.items.length ; i++){
+    //    this_markerContent(myData.items[i].http_url);
+    //    contentString.push(this_markerContent);
+    //};
+
+    //var infowindow = new google.maps.InfoWindow({
+    //content: contentString
+    //});
+
+    var icon="https://img.icons8.com/nolan/64/unesco.png";
+
     var markers = locations.map(function (location, i) {
         return new google.maps.Marker({
             position: location,
-            label: labels[i % labels.length],
-            icon: image
+            map: map,
+            icon: icon,          
         });
-    });
+    });   
 
-var markerCluster = new MarkerClusterer(map, markers, {
+    //markers.addListener('click', function() {
+    //infowindow.open(map, markers);
+    //});
+
+    var markerCluster = new MarkerClusterer(map, markers, {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
 }
-
-
 
 
 
