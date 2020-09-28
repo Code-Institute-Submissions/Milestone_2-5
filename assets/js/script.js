@@ -1,6 +1,6 @@
 
-/* XML to JSON conversion
-* Modified version from here: http://davidwalsh.name/convert-xml-json
+//---XML to JSON conversion
+/* Modified version from here: http://davidwalsh.name/convert-xml-json
 * @param {string} xml XML DOM tree
 */
 function xmlToJson(xml) {
@@ -44,8 +44,9 @@ function xmlToJson(xml) {
     return obj;
 }
 
-// Lowdb code example
-// See https://github.com/typicode/lowdb
+//--- Creating local storage for data
+
+// Lowdb code example: see https://github.com/typicode/lowdb
 
 const adapter = new LocalStorage('db');
 
@@ -86,7 +87,7 @@ if (_.isEmpty(myData)) {
     });
 }
 
-//---Adding data to region search
+//---Adding data to dropdown
 
 var Africa = myData.items.filter(myData=> myData.region === "Africa" );
 var Arab = myData.items.filter(myData=> myData.region === "Arab States" );
@@ -96,9 +97,19 @@ var EuNaAsPaLaCa = myData.items.filter(myData=> myData.region === "Europe and No
 var EuNaAsPa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific" );
 var LaCa = myData.items.filter(myData=> myData.region === "Latin America and the Caribbean" );
 
+
+$( "#1_Africa" ).data(Africa);
+$( "#2_Arab" ).data(Arab);
+$( "#3_Asia-Pacific" ).data(Asia);
+$( "#4_Eu-America" ).data(EuNa);
+$( "#5_World" ).data(EuNaAsPaLaCa);
+$( "#6_Eu-America-Asia-Pacific" ).data(EuNaAsPa);
+$( "#7_Latin-Caribbean" ).data(LaCa);
+
 //var sitesList = document.getElementById('sites');
 //sites.innerHTML = myData.items[0].site;
-//console.log(myData.items[0].site);
+//console.log(myData.items[0].site)
+
 
 
 //---Checkbox functionality
@@ -134,9 +145,6 @@ function addCategoryToMixed() {
 addCategoryToMixed();
 
 
-
-
-
 //---Google maps
 
 function initMap() {
@@ -170,9 +178,9 @@ var markerCluster = new MarkerClusterer(map, markers, {
     });
 }
 
-var lat = myData.indexOf("latitude");
+var lat = myData.items.indexOf("latitude");
 console.log(lat);
-var long = myData.indexOf("longitude")
+var long = myData.items.indexOf("longitude")
 console.log(long);
 
 
