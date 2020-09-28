@@ -169,3 +169,84 @@ var markerCluster = new MarkerClusterer(map, markers, {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
 }
+
+var lat = myData.indexOf("latitude");
+console.log(lat);
+var long = myData.indexOf("longitude")
+console.log(long);
+
+
+//table 
+//source: https://www.w3schools.com/howto/howto_js_filter_table.asp
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+
+
+/*function getTableHeaders(obj) {
+    var tableHeaders = [];
+
+    Object.keys(obj).forEach(function(key) {
+        tableHeaders.push(`<td>${key}</td>`);
+    });
+
+    return `<tr>${tableHeaders}</tr>`;
+}
+
+function generatePaginationButtons(next, prev) {
+    if (next && prev) {
+        return `<button onclick="writeToDocument('${prev}')">Previous</button>
+                <button onclick="writeToDocument('${next}')">Next</button>`;
+    } else if (next && !prev) {
+        return `<button onclick="writeToDocument('${next}')">Next</button>`;
+    } else if (!next && prev) {
+        return `<button onclick="writeToDocument('${prev}')">Previous</button>`;
+    }
+}
+
+/*function writeToDocument(url) {
+    var tableRows = [];
+    var el = document.getElementById("data");
+
+    getData(url, function(data) {
+        var pagination = "";
+
+        if (data.next || data.previous) {
+            pagination = generatePaginationButtons(data.next, data.previous);
+        }
+        data = data.results;
+        var tableHeaders = getTableHeaders(data[0]);
+
+        data.forEach(function(item) {
+            var dataRow = [];
+
+            Object.keys(item).forEach(function(key) {
+                var rowData = item[key].toString();
+                var truncatedData = rowData.substring(0, 15);
+                dataRow.push(`<td>${truncatedData}</td>`);
+            });
+            tableRows.push(`<tr>${dataRow}</tr>`);
+        });
+
+        el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`.replace(/,/g, "");
+    });
+}*/
