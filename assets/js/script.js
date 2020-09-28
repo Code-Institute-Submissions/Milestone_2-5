@@ -106,9 +106,6 @@ $( "#5_World" ).data(EuNaAsPaLaCa);
 $( "#6_Eu-America-Asia-Pacific" ).data(EuNaAsPa);
 $( "#7_Latin-Caribbean" ).data(LaCa);
 
-//var sitesList = document.getElementById('sites');
-//sites.innerHTML = myData.items[0].site;
-//console.log(myData.items[0].site)
 
 
 
@@ -158,30 +155,32 @@ function initMap() {
 
     var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    var locations = [{
-        lat: 40.785091,
-        lng: -73.968285
-    }, {
-        lat: 41.084045,
-        lng: -73.874256
+    var locations = [];
 
-    }];
-
+    var this_location= {};
+    for (var i=0; i<myData.items.length ; i++){
+        this_location = {
+            lat: parseFloat(myData.items[i].latitude),
+            lng: parseFloat(myData.items[i].longitude),
+        }
+        locations.push(this_location);
+    };
+    var image ="https://img.icons8.com/nolan/64/unesco.png";
     var markers = locations.map(function (location, i) {
         return new google.maps.Marker({
             position: location,
-            label: labels[i % labels.length]
+            label: labels[i % labels.length],
+            icon: image
         });
     });
+
 var markerCluster = new MarkerClusterer(map, markers, {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
 }
 
-var lat = myData.items.indexOf("latitude");
-console.log(lat);
-var long = myData.items.indexOf("longitude")
-console.log(long);
+
+
 
 
 //table 
@@ -208,7 +207,9 @@ function myFunction() {
   }
 }
 
-
+//var sitesList = document.getElementById('sites');
+//sites.innerHTML = myData.items[0].site;
+//console.log(myData.items[0].site)
 
 /*function getTableHeaders(obj) {
     var tableHeaders = [];
