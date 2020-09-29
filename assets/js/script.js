@@ -4,21 +4,21 @@
 * @param {string} xml XML DOM tree
 */
 function xmlToJson(xml) {
-    var obj = {};
+    let obj = {};
 
     if (xml.nodeType == 1) {
 
         if (xml.attributes.length > 0) {
             obj["@attributes"] = {};
-            for (var j = 0; j < xml.attributes.length; j++) {
-                var attribute = xml.attributes.item(j);
+            for (let j = 0; j < xml.attributes.length; j++) {
+                let attribute = xml.attributes.item(j);
                 obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
             }
         }
     } else if (xml.nodeType == 3) {
         obj = xml.nodeValue;
     }
-    var textNodes = [].slice.call(xml.childNodes).filter(function (node) {
+    let textNodes = [].slice.call(xml.childNodes).filter(function (node) {
         return node.nodeType === 3;
     });
     if (xml.hasChildNodes() && xml.childNodes.length === textNodes.length) {
@@ -26,14 +26,14 @@ function xmlToJson(xml) {
             return text + node.nodeValue;
         }, "");
     } else if (xml.hasChildNodes()) {
-        for (var i = 0; i < xml.childNodes.length; i++) {
-            var item = xml.childNodes.item(i);
-            var nodeName = item.nodeName;
+        for (let i = 0; i < xml.childNodes.length; i++) {
+            let item = xml.childNodes.item(i);
+            let nodeName = item.nodeName;
             if (typeof obj[nodeName] == "undefined") {
                 obj[nodeName] = xmlToJson(item);
             } else {
                 if (typeof obj[nodeName].push == "undefined") {
-                    var old = obj[nodeName];
+                    let old = obj[nodeName];
                     obj[nodeName] = [];
                     obj[nodeName].push(old);
                 }
@@ -89,13 +89,13 @@ if (_.isEmpty(myData)) {
 
 //---Adding data to dropdown
 function dropdownFunction(){
-    var Africa = myData.items.filter(myData=> myData.region === "Africa" );
-    var Arab = myData.items.filter(myData=> myData.region === "Arab States" );
-    var Asia = myData.items.filter(myData=> myData.region === "Asia" );
-    var EuNa = myData.items.filter(myData=> myData.region === "Europe and North America" );
-    var EuNaAsPaLaCa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific,Latin America and the Caribbean" );
-    var EuNaAsPa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific" );
-    var LaCa = myData.items.filter(myData=> myData.region === "Latin America and the Caribbean" );
+    let Africa = myData.items.filter(myData=> myData.region === "Africa" );
+    let Arab = myData.items.filter(myData=> myData.region === "Arab States" );
+    let Asia = myData.items.filter(myData=> myData.region === "Asia" );
+    let EuNa = myData.items.filter(myData=> myData.region === "Europe and North America" );
+    let EuNaAsPaLaCa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific,Latin America and the Caribbean" );
+    let EuNaAsPa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific" );
+    let LaCa = myData.items.filter(myData=> myData.region === "Latin America and the Caribbean" );
 
     document.getElementById( "Africa-region").value = Africa;
     document.getElementById( "Arab-region").value = Arab;
@@ -104,14 +104,16 @@ function dropdownFunction(){
     document.getElementById( "World-region" ).value = EuNaAsPaLaCa;
     document.getElementById( "Eu-America-Asia-Pacific-region" ).value = EuNaAsPa;
     document.getElementById( "Latin-Caribbean-region" ).value= LaCa;
+
+    checkboxFunction();
 }
 
 //---Checkbox functionality
 
 function checkboxFunction() {
-    var naturalSites = myData.items.filter(myData => myData.category === "Natural");
-    var culturalSites = myData.items.filter(myData => myData.category === "Cultural");
-    var mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
+    let naturalSites = myData.items.filter(myData => myData.category === "Natural");
+    let culturalSites = myData.items.filter(myData => myData.category === "Cultural");
+    let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
 
     document.getElementById("natural").value = naturalSites;
     document.getElementById("cultural").value = culturalSites;
@@ -120,7 +122,7 @@ function checkboxFunction() {
 
 //---Search button
 
-document.getElementById("search-button").addEventListener("click", dropdownFunction(), checkboxFunction() ); 
+document.getElementById("search-button").addEventListener("click", dropdownFunction); 
 
 //---Google maps
 // Nearby search from https://developers.google.com/maps/documentation/javascript/examples/place-search#maps_place_search-javascript
@@ -129,37 +131,36 @@ document.getElementById("search-button").addEventListener("click", dropdownFunct
 // Zoom tha map when marker is clicked https://developers.google.com/maps/documentation/javascript/examples/event-simple
 
 function initMap() {
-    var contentString ={};
-        for (var i = 0; i < myData.items.length ; i++){
+    let contentString ={};
+        for (let i = 0; i < myData.items.length ; i++){
            contentString = myData.items[i].http_url;
         };
-    var infowindow = new google.maps.InfoWindow({
+    let infowindow = new google.maps.InfoWindow({
         content: contentString
         });
-    var map = new google.maps.Map(document.getElementById('map'), {
+    let map = new google.maps.Map(document.getElementById('map'), {
         zoom: 3,
         center: {
             lat: 46.619261,
             lng: -33.134766
         }
+    });
 
     map.addListener("center_changed", () => {
-        window.setTimeout(() => {
-            map.panTo(marker.getPosition());
+        if (currentMarker) {
+            window.setTimeout(() => {
+                map.panTo(currentMarker.getPosition());
             }, 3000);
+        }
     });
 
-    marker.addListener("click", () => {
-        map.setZoom(8);
-        map.setCenter(marker.getPosition());
-        });
-    });
+    let currentMarker;
 
-    var locations = [];
+    let locations = [];
 
-    var this_location= {};
+    let this_location= {};
 
-    for (var i=0; i<myData.items.length ; i++){
+    for (let i=0; i<myData.items.length ; i++){
         this_location = {
             lat: parseFloat(myData.items[i].latitude),
             lng: parseFloat(myData.items[i].longitude),
@@ -167,8 +168,8 @@ function initMap() {
         locations.push(this_location);
     };
 
-    var icon="https://img.icons8.com/nolan/64/unesco.png";
-    var markers = locations.map(function (location, i) {
+    let icon="https://img.icons8.com/nolan/64/unesco.png";
+    let markers = locations.map(function (location, i) {
         return new google.maps.Marker({
             position: location,
             map: map,
@@ -176,25 +177,35 @@ function initMap() {
         });
     }); 
 
-    markers.addListener('click', function() {
-        infowindow.open(map, markers);
+    markers.forEach((marker) => {
+        marker.addListener("click", (event) => {
+            console.log(event);
+            console.log(marker);
+            currentMarker = marker;
+            map.setZoom(8);
+            map.setCenter(marker.getPosition());
+            infowindow.open(map, marker);
+        });
     });
 
-    var markerCluster = new MarkerClusterer(map, markers, {
+    let markerCluster = new MarkerClusterer(map, markers, {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
 
-    let service;
+    const request = {
+        query: "Museum of Contemporary Art",
+        fields: ["name", "geometry"],
+    };
 
-        service = new google.maps.places.PlacesService(map);
-        service.findPlaceFromQuery(locations, (results, status) => {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                for (let i = 0; i < results.length; i++) {
-                    createMarker(results[i]);
-                    }
-                    map.setCenter(results[0].geometry.location);
+    let service = new google.maps.places.PlacesService(map);
+    service.findPlaceFromQuery(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (let i = 0; i < results.length; i++) {
+                createMarker(results[i]);
                 }
-        });
+                map.setCenter(results[0].geometry.location);
+            }
+    });
     }
 
     function createMarker(place) {
@@ -213,8 +224,8 @@ function initMap() {
 //---table 
 //source: https://www.w3schools.com/howto/howto_js_filter_table.asp
 function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
+  // Declare letiables
+  let input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
@@ -234,12 +245,12 @@ function myFunction() {
   }
 }
 
-//var sitesList = document.getElementById('sites');
+//let sitesList = document.getElementById('sites');
 //sites.innerHTML = myData.items[0].site;
 //console.log(myData.items[0].site)
 
 /*function getTableHeaders(obj) {
-    var tableHeaders = [];
+    let tableHeaders = [];
 
     Object.keys(obj).forEach(function(key) {
         tableHeaders.push(`<td>${key}</td>`);
@@ -260,24 +271,24 @@ function generatePaginationButtons(next, prev) {
 }
 
 /*function writeToDocument(url) {
-    var tableRows = [];
-    var el = document.getElementById("data");
+    let tableRows = [];
+    let el = document.getElementById("data");
 
     getData(url, function(data) {
-        var pagination = "";
+        let pagination = "";
 
         if (data.next || data.previous) {
             pagination = generatePaginationButtons(data.next, data.previous);
         }
         data = data.results;
-        var tableHeaders = getTableHeaders(data[0]);
+        let tableHeaders = getTableHeaders(data[0]);
 
         data.forEach(function(item) {
-            var dataRow = [];
+            let dataRow = [];
 
             Object.keys(item).forEach(function(key) {
-                var rowData = item[key].toString();
-                var truncatedData = rowData.substring(0, 15);
+                let rowData = item[key].toString();
+                let truncatedData = rowData.substring(0, 15);
                 dataRow.push(`<td>${truncatedData}</td>`);
             });
             tableRows.push(`<tr>${dataRow}</tr>`);
@@ -289,10 +300,10 @@ function generatePaginationButtons(next, prev) {
 
 
 //spinner
-var myVar;
+let mylet;
 
 function timeout() {
-  myVar = setTimeout(showPage, 3000);
+  mylet = setTimeout(showPage, 3000);
 }
 
 function showPage() {
