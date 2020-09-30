@@ -118,6 +118,7 @@ function search(Africa, Arab, Asia, EuNa,EuNaAsPaLaCa, EuNaAsPa, LaCa){
 				let e = document.getElementById("regions");
 				let result = e.options[e.selectedIndex].value;
 //mit csinaljon az adatokkal?
+//locations-bol azt a markert jelenitse meg amelyik a variable-nek megfelel
 				document.getElementById("").innerHTML = result;
 			}
 }
