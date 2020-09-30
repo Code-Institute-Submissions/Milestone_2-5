@@ -87,42 +87,59 @@ if (_.isEmpty(myData)) {
     });
 }
 
+
+
 //---Adding data to dropdown
 function dropdownFunction(){
+
     let Africa = myData.items.filter(myData=> myData.region === "Africa" );
-    let Arab = myData.items.filter(myData=> myData.region === "Arab States" );
-    let Asia = myData.items.filter(myData=> myData.region === "Asia" );
-    let EuNa = myData.items.filter(myData=> myData.region === "Europe and North America" );
-    let EuNaAsPaLaCa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific,Latin America and the Caribbean" );
-    let EuNaAsPa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific" );
-    let LaCa = myData.items.filter(myData=> myData.region === "Latin America and the Caribbean" );
-
     document.getElementById( "Africa-region").value = Africa;
-    document.getElementById( "Arab-region").value = Arab;
-    document.getElementById( "Asia-Pacific-region" ).value = Asia;
-    document.getElementById( "Eu-America-region" ).value = EuNa;
-    document.getElementById( "World-region" ).value = EuNaAsPaLaCa;
-    document.getElementById( "Eu-America-Asia-Pacific-region" ).value = EuNaAsPa;
-    document.getElementById( "Latin-Caribbean-region" ).value= LaCa;
 
-    checkboxFunction();
+    let Arab = myData.items.filter(myData=> myData.region === "Arab States" );
+    document.getElementById( "Arab-region").value = Arab;
+
+    let Asia = myData.items.filter(myData=> myData.region === "Asia" );
+    document.getElementById( "Asia-Pacific-region" ).value = Asia;
+
+    let EuNa = myData.items.filter(myData=> myData.region === "Europe and North America" );
+    document.getElementById( "Eu-America-region" ).value = EuNa;
+
+    let EuNaAsPaLaCa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific,Latin America and the Caribbean" );
+    document.getElementById( "World-region" ).value = EuNaAsPaLaCa;
+
+    let EuNaAsPa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific" );
+    document.getElementById( "Eu-America-Asia-Pacific-region" ).value = EuNaAsPa;
+
+    let LaCa = myData.items.filter(myData=> myData.region === "Latin America and the Caribbean" );
+    document.getElementById( "Latin-Caribbean-region" ).value= LaCa;
+    
+// https://mkyong.com/javascript/javascript-get-selected-value-from-dropdown-list/
+function search(Africa, Arab, Asia, EuNa,EuNaAsPaLaCa, EuNaAsPa, LaCa){
+				let e = document.getElementById("regions");
+				let result = e.options[e.selectedIndex].value;
+//mit csinaljon az adatokkal?
+				document.getElementById("").innerHTML = result;
+			}
 }
 
 //---Checkbox functionality
 
 function checkboxFunction() {
     let naturalSites = myData.items.filter(myData => myData.category === "Natural");
-    let culturalSites = myData.items.filter(myData => myData.category === "Cultural");
-    let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
-
     document.getElementById("natural").value = naturalSites;
+
+    let culturalSites = myData.items.filter(myData => myData.category === "Cultural");
     document.getElementById("cultural").value = culturalSites;
+
+    let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
     document.getElementById("mixed").value = mixedSites;
 }
 
-//---Search button
 
-document.getElementById("search-button").addEventListener("click", dropdownFunction); 
+//---Search button
+document.getElementById("search-button").addEventListener("click", search());
+
+
 
 //---Google maps
 // Nearby search from https://developers.google.com/maps/documentation/javascript/examples/place-search#maps_place_search-javascript
@@ -132,8 +149,8 @@ document.getElementById("search-button").addEventListener("click", dropdownFunct
 
 function initMap() {
     let contentString ={};
-        for (let i = 0; i < myData.items.length ; i++){
-           contentString = myData.items[i].http_url;
+        for (let i = 0; i < myData.items.length; i++){
+           contentString = myData.items[i].site + myData.items[i].short_description;
         };
     let infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -192,9 +209,7 @@ function initMap() {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
 
-    const request = {
-        query: "Museum of Contemporary Art",
-        fields: ["name", "geometry"],
+    /*const request = 
     };
 
     let service = new google.maps.places.PlacesService(map);
@@ -205,10 +220,10 @@ function initMap() {
                 }
                 map.setCenter(results[0].geometry.location);
             }
-    });
+    });*/
     }
 
-    function createMarker(place) {
+    /*function createMarker(place) {
         const marker = new google.maps.Marker({
             map,
             position: place.geometry.location,
@@ -217,7 +232,7 @@ function initMap() {
             infowindow.setContent(place.name);
             infowindow.open(map);
             });
-    }
+    }*/
 
 
 

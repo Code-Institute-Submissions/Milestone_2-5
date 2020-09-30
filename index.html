@@ -74,7 +74,7 @@
 			<div class="row no-gutters search-criteria">
 				<div class="col">
 					<h4>1. Pick a region:</h4>
-			        <select class="mdb-select md-form" searchable="Search here..">
+			        <select class="mdb-select md-form" searchable="Search here.." id="regions">
                         <option value="" disabled selected>Choose a region...</option>
                         <option id="Africa-region" onclick="dropdownFunction()">Africa</option>
                         <option id="Arab-region" onclick="dropdownFunction()">Arab States</option>
@@ -98,7 +98,7 @@
 		        </div>
 			</div>
 			<div class="row no-gutters" id="button-container">
-				<button type="button" class="btn btn-primary" id="search-button">Show on map</button>
+				<button type="button" class="btn btn-primary" id="search-button" onclick="search()">Show on map</button>
 			</div>
 		</section>
 
