@@ -86,11 +86,7 @@ if (_.isEmpty(myData)) {
         db.defaults({ items: data.query.row }).write();
     });
 }
-
-
-
-//---Adding data to dropdown
-function dropdownFunction(){
+//---Adding data to dropdown options
 
     let Africa = myData.items.filter(myData=> myData.region === "Africa" );
     document.getElementById( "Africa-region").value = Africa;
@@ -98,34 +94,18 @@ function dropdownFunction(){
     let Arab = myData.items.filter(myData=> myData.region === "Arab States" );
     document.getElementById( "Arab-region").value = Arab;
 
-    let Asia = myData.items.filter(myData=> myData.region === "Asia" );
+    let Asia = myData.items.filter(myData=> myData.region === "Asia and the Pacific" );
     document.getElementById( "Asia-Pacific-region" ).value = Asia;
 
     let EuNa = myData.items.filter(myData=> myData.region === "Europe and North America" );
     document.getElementById( "Eu-America-region" ).value = EuNa;
 
-    let EuNaAsPaLaCa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific,Latin America and the Caribbean" );
-    document.getElementById( "World-region" ).value = EuNaAsPaLaCa;
-
-    let EuNaAsPa = myData.items.filter(myData=> myData.region === "Europe and North America,Asia and the Pacific" );
-    document.getElementById( "Eu-America-Asia-Pacific-region" ).value = EuNaAsPa;
-
     let LaCa = myData.items.filter(myData=> myData.region === "Latin America and the Caribbean" );
     document.getElementById( "Latin-Caribbean-region" ).value= LaCa;
     
-// https://mkyong.com/javascript/javascript-get-selected-value-from-dropdown-list/
-function search(Africa, Arab, Asia, EuNa,EuNaAsPaLaCa, EuNaAsPa, LaCa){
-				let e = document.getElementById("regions");
-				let result = e.options[e.selectedIndex].value;
-//mit csinaljon az adatokkal?
-//locations-bol azt a markert jelenitse meg amelyik a variable-nek megfelel
-				document.getElementById("").innerHTML = result;
-			}
-}
 
-//---Checkbox functionality
+//---Checkboxes
 
-function checkboxFunction() {
     let naturalSites = myData.items.filter(myData => myData.category === "Natural");
     document.getElementById("natural").value = naturalSites;
 
@@ -134,13 +114,16 @@ function checkboxFunction() {
 
     let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
     document.getElementById("mixed").value = mixedSites;
+
+function myFunction() {
+  var checkBox = document.getElementById("Natural");
+  var naturalMarkers = document.getElementById("text");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
 }
-
-
-//---Search button
-document.getElementById("search-button").addEventListener("click", search());
-
-
 
 //---Google maps
 // Nearby search from https://developers.google.com/maps/documentation/javascript/examples/place-search#maps_place_search-javascript
@@ -151,7 +134,7 @@ document.getElementById("search-button").addEventListener("click", search());
 function initMap() {
     let contentString ={};
         for (let i = 0; i < myData.items.length; i++){
-           contentString = myData.items[i].site + myData.items[i].short_description;
+           contentString = myData.items[i].site;
         };
     let infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -185,6 +168,74 @@ function initMap() {
         }
         locations.push(this_location);
     };
+
+
+    let locationsInAfrica = [];
+    let this_locationAfrica={};
+
+    for (let i=0; i< Africa.length ; i++){
+        this_locationAfrica= {
+            lat: parseFloat(Africa[i].latitude),
+            lng: parseFloat(Africa[i].longitude),
+        }
+        locationsInAfrica.push(this_locationAfrica);
+    };
+
+
+    let locationsInArab = [];
+    let this_locationArab={};
+
+    for (let i=0; i< Arab.length ; i++){
+        this_locationArab= {
+            lat: parseFloat(Arab[i].latitude),
+            lng: parseFloat(Arab[i].longitude),
+        }
+        locationsInArab.push(this_locationArab);
+    };
+
+
+    let locationsInAsia = [];
+    let this_locationAsia={};
+
+    for (let i=0; i< Asia.length ; i++){
+        this_locationAsia= {
+            lat: parseFloat(Asia[i].latitude),
+            lng: parseFloat(Asia[i].longitude),
+        }
+        locationsInAsia.push(this_locationAsia);
+    };
+    
+    let locationsInEuNa = [];
+    let this_locationEuNa={};
+
+    for (let i=0; i< EuNa.length ; i++){
+        this_locationEuNa= {
+            lat: parseFloat(EuNa[i].latitude),
+            lng: parseFloat(EuNa[i].longitude),
+        }
+        locationsInEuNa.push(this_locationEuNa);
+    };
+
+    let locationsInLaCa = [];
+    let this_locationLaCa={};
+
+    for (let i=0; i< LaCa.length ; i++){
+        this_locationLaCa= {
+            lat: parseFloat(LaCa[i].latitude),
+            lng: parseFloat(LaCa[i].longitude),
+        }
+        locationsInLaCa.push(this_locationLaCa);
+    };
+
+//---Search button
+
+//https://mkyong.com/javascript/javascript-get-selected-value-from-dropdown-list/
+/*function search(){
+				let e = document.getElementById("regions");
+				let result = e.options[e.selectedIndex].value;
+				document.getElementById("result").innerHTML = result;
+            }
+document.getElementById("search-button").addEventListener("click", search());*/
 
     let icon="https://img.icons8.com/nolan/64/unesco.png";
     let markers = locations.map(function (location, i) {
@@ -236,7 +287,7 @@ function initMap() {
     }*/
 
 
-
+/*
 //---table 
 //source: https://www.w3schools.com/howto/howto_js_filter_table.asp
 function myFunction() {
@@ -312,7 +363,7 @@ function generatePaginationButtons(next, prev) {
 
         el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`.replace(/,/g, "");
     });
-}*/
+}
 
 
 //spinner
@@ -325,4 +376,4 @@ function timeout() {
 function showPage() {
   document.getElementById("loader").style.display = "none";
   document.getElementById("myTable").style.display = "block";
-}
+}*/
