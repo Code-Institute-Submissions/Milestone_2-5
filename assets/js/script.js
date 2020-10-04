@@ -129,7 +129,6 @@ function myFunction() {
 // Nearby search from https://developers.google.com/maps/documentation/javascript/examples/place-search#maps_place_search-javascript
 // Markers: https://developers.google.com/maps/documentation/javascript/markers#introduction
 // Info window https://developers.google.com/maps/documentation/javascript/infowindows
-// Zoom tha map when marker is clicked https://developers.google.com/maps/documentation/javascript/examples/event-simple
 
 function initMap() {
     let contentString ={};
@@ -146,29 +145,6 @@ function initMap() {
             lng: -33.134766
         }
     });
-
-    map.addListener("center_changed", () => {
-        if (currentMarker) {
-            window.setTimeout(() => {
-                map.panTo(currentMarker.getPosition());
-            }, 3000);
-        }
-    });
-
-    let currentMarker;
-
-    let locations = [];
-
-    let this_location= {};
-
-    for (let i=0; i<myData.items.length ; i++){
-        this_location = {
-            lat: parseFloat(myData.items[i].latitude),
-            lng: parseFloat(myData.items[i].longitude),
-        }
-        locations.push(this_location);
-    };
-
 
     let locationsInAfrica = [];
     let this_locationAfrica={};
@@ -227,6 +203,20 @@ function initMap() {
         locationsInLaCa.push(this_locationLaCa);
     };
 
+    let currentMarker;
+
+    let locations = [];
+
+    let this_location= {};
+
+    for (let i=0; i<myData.items.length ; i++){
+        this_location = {
+            lat: parseFloat(myData.items[i].latitude),
+            lng: parseFloat(myData.items[i].longitude),
+        }
+        locations.push(this_location);
+    };
+
 //---Search button
 
 //https://mkyong.com/javascript/javascript-get-selected-value-from-dropdown-list/
@@ -236,6 +226,12 @@ function initMap() {
 				document.getElementById("result").innerHTML = result;
             }
 document.getElementById("search-button").addEventListener("click", search());*/
+
+$('#Africa-region option').each(function() {
+    if(this.selected == true){
+       $("#Asia-region").hide()
+    };
+})
 
     let icon="https://img.icons8.com/nolan/64/unesco.png";
     let markers = locations.map(function (location, i) {
@@ -251,7 +247,7 @@ document.getElementById("search-button").addEventListener("click", search());*/
             console.log(event);
             console.log(marker);
             currentMarker = marker;
-            map.setZoom(8);
+            map.setZoom(10);
             map.setCenter(marker.getPosition());
             infowindow.open(map, marker);
         });
@@ -260,37 +256,11 @@ document.getElementById("search-button").addEventListener("click", search());*/
     let markerCluster = new MarkerClusterer(map, markers, {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
-
-    /*const request = 
-    };
-
-    let service = new google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (let i = 0; i < results.length; i++) {
-                createMarker(results[i]);
-                }
-                map.setCenter(results[0].geometry.location);
-            }
-    });*/
-    }
-
-    /*function createMarker(place) {
-        const marker = new google.maps.Marker({
-            map,
-            position: place.geometry.location,
-        });
-        google.maps.event.addListener(marker, "click", () => {
-            infowindow.setContent(place.name);
-            infowindow.open(map);
-            });
-    }*/
-
-
-/*
+}
+    
 //---table 
 //source: https://www.w3schools.com/howto/howto_js_filter_table.asp
-function myFunction() {
+/*function myFunction() {
   // Declare letiables
   let input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
@@ -316,7 +286,7 @@ function myFunction() {
 //sites.innerHTML = myData.items[0].site;
 //console.log(myData.items[0].site)
 
-/*function getTableHeaders(obj) {
+function getTableHeaders(obj) {
     let tableHeaders = [];
 
     Object.keys(obj).forEach(function(key) {
@@ -337,7 +307,7 @@ function generatePaginationButtons(next, prev) {
     }
 }
 
-/*function writeToDocument(url) {
+function writeToDocument(url) {
     let tableRows = [];
     let el = document.getElementById("data");
 
@@ -363,17 +333,4 @@ function generatePaginationButtons(next, prev) {
 
         el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`.replace(/,/g, "");
     });
-}
-
-
-//spinner
-let mylet;
-
-function timeout() {
-  mylet = setTimeout(showPage, 3000);
-}
-
-function showPage() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("myTable").style.display = "block";
 }*/
