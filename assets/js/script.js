@@ -54,10 +54,6 @@ const db = low(adapter);
 
 ENTITY_ID = 'items';
 
-// Set default state
-// db.defaults({ items: [] })
-//   .write()
-
 function add() {
     db.get(ENTITY_ID)
         .push({ time: Date.now() })
@@ -86,7 +82,7 @@ if (_.isEmpty(myData)) {
         db.defaults({ items: data.query.row }).write();
     });
 }
-//---Adding data to dropdown options
+//---Dropdown options
 
     let Africa = myData.items.filter(myData=> myData.region === "Africa" );
     document.getElementById( "Africa-region").value = Africa;
@@ -126,7 +122,6 @@ function myFunction() {
 }
 
 //---Google maps
-// Nearby search from https://developers.google.com/maps/documentation/javascript/examples/place-search#maps_place_search-javascript
 // Markers: https://developers.google.com/maps/documentation/javascript/markers#introduction
 // Info window https://developers.google.com/maps/documentation/javascript/infowindows
 
@@ -146,6 +141,8 @@ function initMap() {
         }
     });
 
+//markers by region
+
     let locationsInAfrica = [];
     let this_locationAfrica={};
 
@@ -157,7 +154,6 @@ function initMap() {
         locationsInAfrica.push(this_locationAfrica);
     };
 
-
     let locationsInArab = [];
     let this_locationArab={};
 
@@ -168,7 +164,6 @@ function initMap() {
         }
         locationsInArab.push(this_locationArab);
     };
-
 
     let locationsInAsia = [];
     let this_locationAsia={};
@@ -204,6 +199,8 @@ function initMap() {
     };
 
     let currentMarker;
+
+//all markers
 
     let locations = [];
 
@@ -260,77 +257,3 @@ $('#Africa-region option').each(function() {
     
 //---table 
 //source: https://www.w3schools.com/howto/howto_js_filter_table.asp
-/*function myFunction() {
-  // Declare letiables
-  let input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-
-//let sitesList = document.getElementById('sites');
-//sites.innerHTML = myData.items[0].site;
-//console.log(myData.items[0].site)
-
-function getTableHeaders(obj) {
-    let tableHeaders = [];
-
-    Object.keys(obj).forEach(function(key) {
-        tableHeaders.push(`<td>${key}</td>`);
-    });
-
-    return `<tr>${tableHeaders}</tr>`;
-}
-
-function generatePaginationButtons(next, prev) {
-    if (next && prev) {
-        return `<button onclick="writeToDocument('${prev}')">Previous</button>
-                <button onclick="writeToDocument('${next}')">Next</button>`;
-    } else if (next && !prev) {
-        return `<button onclick="writeToDocument('${next}')">Next</button>`;
-    } else if (!next && prev) {
-        return `<button onclick="writeToDocument('${prev}')">Previous</button>`;
-    }
-}
-
-function writeToDocument(url) {
-    let tableRows = [];
-    let el = document.getElementById("data");
-
-    getData(url, function(data) {
-        let pagination = "";
-
-        if (data.next || data.previous) {
-            pagination = generatePaginationButtons(data.next, data.previous);
-        }
-        data = data.results;
-        let tableHeaders = getTableHeaders(data[0]);
-
-        data.forEach(function(item) {
-            let dataRow = [];
-
-            Object.keys(item).forEach(function(key) {
-                let rowData = item[key].toString();
-                let truncatedData = rowData.substring(0, 15);
-                dataRow.push(`<td>${truncatedData}</td>`);
-            });
-            tableRows.push(`<tr>${dataRow}</tr>`);
-        });
-
-        el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`.replace(/,/g, "");
-    });
-}*/
