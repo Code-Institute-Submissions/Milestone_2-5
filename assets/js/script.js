@@ -111,8 +111,8 @@ if (_.isEmpty(myData)) {
     let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
     document.getElementById("mixed").value = mixedSites;
 
-function myFunction() {
-  var checkBox = document.getElementById("Natural");
+function checkboxFunction() {
+  var checkBox = document.getElementById("natural");
   var naturalMarkers = document.getElementById("text");
   if (checkBox.checked == true){
     text.style.display = "block";
