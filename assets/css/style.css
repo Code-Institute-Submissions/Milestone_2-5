@@ -77,17 +77,58 @@ form input{
 margin:5px;
 }
 
-#button-container{
-  justify-content:center;
+/*----dropdown----*/
+
+#myInput {
+  box-sizing: border-box;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+.button-container{
   background-color: aliceblue;
   margin: 0 40px;
+  text-align:center;
+  justify-content:center;
 }
 button{
   text-align:center;
   width:200px;
   margin:40px;
 }
-
 /*----footer----*/
 
 footer{

@@ -314,24 +314,34 @@ let this_locationMixed={};
     };
 
     //---infowindows content
-
+    //site names
     let contentList=[];
     let siteList ={};
         for (let i = 0; i < myData.items.length; i++){
         siteList=myData.items[i].site;
         contentList.push(siteList);
-        //console.log(contentList);
         };
     
     let contentItems=contentList.toString();
     console.log(contentItems)
    
+    // short descriptions
+    let descriptionsList=[];
+    let descrItemList ={};
+        for (let i = 0; i < myData.items.length; i++){
+        descrItemList=myData.items[i].short_description;
+        descriptionsList.push(descrItemList);
+        };
+    
+    let descriptions=descriptionsList.toString();
+    console.log(descriptions);
+
     let contentString={};
     for (let i = 0; i < contentItems.length; i++){
         contentString = contentItems[i];
     };
 
-   //console.log(contentString);
+   console.log(contentString);
 
     let infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -379,11 +389,26 @@ function checkboxFunction() {
 });
 }
 
-//---Search button
+//Dropdown  https://www.w3schools.com/howto/howto_js_filter_dropdown.asp
 
-function search(){
-				let e = document.getElementById("regions");
-				let result = e.options[e.selectedIndex].value;
-				document.getElementById("result").innerHTML = result;
-            }
-document.getElementById("search-button").addEventListener("click", search());
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = function(){
+      $("a:href").val('contentItems');
+  }
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}

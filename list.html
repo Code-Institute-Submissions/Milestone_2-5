@@ -33,40 +33,28 @@
 	</header>
   
   <main>
-
-  <section  id="data">
-    <div class= "row no-gutters">
-        <div class="col-sm">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for sites..">
+  <section >
+        <div class="dropdown">
+                <div class="row no-gutters">
+                    <div class="col-sm button-container">
+                        <button onclick="myFunction()" class="dropbtn btn btn-primary">Search the full list</button>
+                    </div>
+                </div>
+                <div id="myDropdown" class="row no-gutter dropdown-content">
+                    <div class="col-sm">
+                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                        <a href="#"></a>
+                    </div>
+                </div>
         </div>
-    </div>
-    <div class="row no-gutters">
-        <div class="col-sm">
-            <table id="myTable">
-                <tr class="header">
-                    <th>Name</th>
-                    <th>Region</th>
-                    <th>Countries</th>
-                    <th>Year added</th>
-                    <th>Category</th>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-            </table>
+        <div  id="data">
         </div>
-    </div>
   </section>
 
   <section id="syndication" class="container-fluid">
   <div id="">
     <p>
-      Copyright © 1992 - 2020 UNESCO/World Heritage Centre. All rights reserved.<br>
-      Please Visit the UNESCO/WHC <a target="_blank" href="https://whc.unesco.org">home page.</a>for more useful information!
+      Copyright © 1992 - 2020 UNESCO/World Heritage Centre. All rights reserved.
     </p>
   </div>
   </section> 
