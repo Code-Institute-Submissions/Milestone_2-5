@@ -73,16 +73,10 @@ body{
   padding-bottom:20px;
   text-align:center;
 }
-.mdb-select.md-form{
-  width: 100%;
-  border: solid 2px #3f95c3;
-  border-radius: 5px;
+form input{
+margin:5px;
 }
-.field{
-  width: 50%;
-  border: solid 2px #3f95c3;
-  border-radius: 5px;
-}
+
 #button-container{
   justify-content:center;
   background-color: aliceblue;
@@ -114,31 +108,3 @@ div#map {
   margin:40px;
   border:solid 2px #3f95c3;
   }
-
-/*----table----*/
-#myInput {
-  border: 1px solid #3f95c3;
-  margin: 12px 40px;
-  justify-content:center;
-}
-
-#myTable {
-  margin:40px;
-  border: 2px solid #3f95c3;
-  font-size: 18px;
-  justify-content:center;
-}
-
-#myTable th, #myTable td {
-  text-align: center;
-  padding: 12px;
-}
-
-#myTable tr {
-  border: 2px solid #ddd;
-}
-
-#myTable tr.header, #myTable tr:hover {
-  border: 2px solid #ddd;
-  background-color:   #3f95c3;
-}

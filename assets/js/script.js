@@ -1,4 +1,3 @@
-
 //---XML to JSON conversion
 /* Modified version from here: http://davidwalsh.name/convert-xml-json
 * @param {string} xml XML DOM tree
@@ -82,125 +81,225 @@ if (_.isEmpty(myData)) {
         db.defaults({ items: data.query.row }).write();
     });
 }
-//---Dropdown options
-
-    let Africa = myData.items.filter(myData=> myData.region === "Africa" );
-    document.getElementById( "Africa-region").value = Africa;
-
-    let Arab = myData.items.filter(myData=> myData.region === "Arab States" );
-    document.getElementById( "Arab-region").value = Arab;
-
-    let Asia = myData.items.filter(myData=> myData.region === "Asia and the Pacific" );
-    document.getElementById( "Asia-Pacific-region" ).value = Asia;
-
-    let EuNa = myData.items.filter(myData=> myData.region === "Europe and North America" );
-    document.getElementById( "Eu-America-region" ).value = EuNa;
-
-    let LaCa = myData.items.filter(myData=> myData.region === "Latin America and the Caribbean" );
-    document.getElementById( "Latin-Caribbean-region" ).value= LaCa;
-    
-
-//---Checkboxes
-
-    let naturalSites = myData.items.filter(myData => myData.category === "Natural");
-    document.getElementById("natural").value = naturalSites;
-
-    let culturalSites = myData.items.filter(myData => myData.category === "Cultural");
-    document.getElementById("cultural").value = culturalSites;
-
-    let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
-    document.getElementById("mixed").value = mixedSites;
-
-function checkboxFunction() {
-  var checkBox = document.getElementById("natural");
-  var naturalMarkers = document.getElementById("text");
-  if (checkBox.checked == true){
-    text.style.display = "block";
-  } else {
-     text.style.display = "none";
-  }
-}
-
 //---Google maps
 // Markers: https://developers.google.com/maps/documentation/javascript/markers#introduction
 // Info window https://developers.google.com/maps/documentation/javascript/infowindows
-
+  
 function initMap() {
-    let contentString ={};
-        for (let i = 0; i < myData.items.length; i++){
-           contentString = myData.items[i].site;
-        };
-    let infowindow = new google.maps.InfoWindow({
-        content: contentString
-        });
+    
     let map = new google.maps.Map(document.getElementById('map'), {
         zoom: 3,
         center: {
             lat: 46.619261,
             lng: -33.134766
+        },
+        styles:[
+            {"featureType": "all",
+            "elementType": "all",
+            "stylers": [
+            {
+                "visibility": "off"
+            },
+            {
+                "hue": "#59ff00"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#444444"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "hue": "#00c6ff"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "hue": "#00cfff"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "hue": "#ff0000"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.attraction",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.attraction",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "hue": "#ff0000"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.attraction",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "hue": "#ff0000"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.business",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "hue": "#ff0000"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 45
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "hue": "#00fff5"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#46bcec"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    }
+],
+});
+
+//---markers of sites by type (latitude and longitude)
+
+let locationsNatural = [];
+let this_locationNatural={};
+    for (let i=0; i< naturalSites.length ; i++){
+        this_locationNatural= {
+            lat: parseFloat(naturalSites[i].latitude),
+            lng: parseFloat(naturalSites[i].longitude),
         }
-    });
-
-//markers by region
-
-    let locationsInAfrica = [];
-    let this_locationAfrica={};
-
-    for (let i=0; i< Africa.length ; i++){
-        this_locationAfrica= {
-            lat: parseFloat(Africa[i].latitude),
-            lng: parseFloat(Africa[i].longitude),
-        }
-        locationsInAfrica.push(this_locationAfrica);
+        locationsNatural.push(this_locationNatural);
     };
 
-    let locationsInArab = [];
-    let this_locationArab={};
-
-    for (let i=0; i< Arab.length ; i++){
-        this_locationArab= {
-            lat: parseFloat(Arab[i].latitude),
-            lng: parseFloat(Arab[i].longitude),
+let locationsCultural = [];
+let this_locationCultural={};
+    for (let i=0; i< culturalSites.length ; i++){
+        this_locationCultural= {
+            lat: parseFloat(culturalSites[i].latitude),
+            lng: parseFloat(culturalSites[i].longitude),
         }
-        locationsInArab.push(this_locationArab);
+        locationsCultural.push(this_locationCultural);
     };
 
-    let locationsInAsia = [];
-    let this_locationAsia={};
-
-    for (let i=0; i< Asia.length ; i++){
-        this_locationAsia= {
-            lat: parseFloat(Asia[i].latitude),
-            lng: parseFloat(Asia[i].longitude),
+let locationsMixed = [];
+let this_locationMixed={};
+    for (let i=0; i< mixedSites.length ; i++){
+        this_locationMixed= {
+            lat: parseFloat(mixedSites[i].latitude),
+            lng: parseFloat(mixedSites[i].longitude),
         }
-        locationsInAsia.push(this_locationAsia);
-    };
-    
-    let locationsInEuNa = [];
-    let this_locationEuNa={};
-
-    for (let i=0; i< EuNa.length ; i++){
-        this_locationEuNa= {
-            lat: parseFloat(EuNa[i].latitude),
-            lng: parseFloat(EuNa[i].longitude),
-        }
-        locationsInEuNa.push(this_locationEuNa);
+        locationsMixed.push(this_locationMixed);
     };
 
-    let locationsInLaCa = [];
-    let this_locationLaCa={};
-
-    for (let i=0; i< LaCa.length ; i++){
-        this_locationLaCa= {
-            lat: parseFloat(LaCa[i].latitude),
-            lng: parseFloat(LaCa[i].longitude),
-        }
-        locationsInLaCa.push(this_locationLaCa);
-    };
 
     let currentMarker;
 
-//all markers
+//---all markers
 
     let locations = [];
 
@@ -214,21 +313,29 @@ function initMap() {
         locations.push(this_location);
     };
 
-//---Search button
+    //---infowindows content
 
-//https://mkyong.com/javascript/javascript-get-selected-value-from-dropdown-list/
-/*function search(){
-				let e = document.getElementById("regions");
-				let result = e.options[e.selectedIndex].value;
-				document.getElementById("result").innerHTML = result;
-            }
-document.getElementById("search-button").addEventListener("click", search());*/
-
-$('#Africa-region option').each(function() {
-    if(this.selected == true){
-       $("#Asia-region").hide()
+    let contentList=[];
+    let siteList ={};
+        for (let i = 0; i < myData.items.length; i++){
+        siteList=myData.items[i].site;
+        contentList.push(siteList);
+        //console.log(contentList);
+        };
+    
+    let contentItems=contentList.toString();
+    console.log(contentItems)
+   
+    let contentString={};
+    for (let i = 0; i < contentItems.length; i++){
+        contentString = contentItems[i];
     };
-})
+
+   //console.log(contentString);
+
+    let infowindow = new google.maps.InfoWindow({
+        content: contentString
+        });
 
     let icon="https://img.icons8.com/nolan/64/unesco.png";
     let markers = locations.map(function (location, i) {
@@ -254,6 +361,29 @@ $('#Africa-region option').each(function() {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
 }
-    
-//---table 
-//source: https://www.w3schools.com/howto/howto_js_filter_table.asp
+
+//---Checkboxes
+
+    let naturalSites = myData.items.filter(myData => myData.category === "Natural");
+    document.getElementById("natural").value = naturalSites;
+
+    let culturalSites = myData.items.filter(myData => myData.category === "Cultural");
+    document.getElementById("cultural").value = culturalSites;
+
+    let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
+    document.getElementById("mixed").value = mixedSites;
+
+function checkboxFunction() {
+  $("natural").click(function(){
+    $("locationsCultural", "locationsMixed").hide;
+});
+}
+
+//---Search button
+
+function search(){
+				let e = document.getElementById("regions");
+				let result = e.options[e.selectedIndex].value;
+				document.getElementById("result").innerHTML = result;
+            }
+document.getElementById("search-button").addEventListener("click", search());

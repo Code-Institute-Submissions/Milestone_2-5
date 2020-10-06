@@ -22,9 +22,6 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="list.html">List of sites</a>
-					</li>
 				</ul>
 			</div>
 			<a class="navbar-brand"
@@ -51,7 +48,7 @@
                     </p>
 					<p>To learn more about the locations and start planning your visit, search the map below!
                     </p>
-				</div 
+				</div> 
             </div> 
         </section> 
 
@@ -65,33 +62,20 @@
 			</div>
 			<div class="row no-gutters search-criteria">
 				<div class="col">
-					<h4>Select by criteria:</h4>
+					<h4>What kind of site are you looking for?</h4>
 				</div>
 			</div>
 
             <!---source:https://mdbootstrap.com/snippets/jquery/mdbootstrap/921549#html-tab-view-->
 
 			<div class="row no-gutters search-criteria">
-				<div class="col">
-					<h4>1. Pick a region:</h4>
-			        <select class="mdb-select md-form" searchable="Search here.." id="regions">
-                        <option value="">Choose a region...</option>
-                        <option id="Africa-region" onclick="dropdownFunction()">Africa</option>
-                        <option id="Arab-region" onclick="dropdownFunction()">Arab States</option>
-                        <option id="Asia-Pacific-region" onclick="dropdownFunction()">Asia and the Pacific</option>
-                        <option id="Eu-America-region" onclick="dropdownFunction()">Europe and North America</option>
-                        <option id="Latin-Caribbean-region" onclick="dropdownFunction()">Latin America and the Caribbean</option>
-                    </select>
-				</div>
-
             <!---source: https://www.w3schools.com/jsref/prop_checkbox_checked.asp-->
 
 		        <div class="col-sm">
-		            <h4>2. Pick a category:</h4>
                     <form action="/action_page.php">
                         <input type="checkbox" name="Natural_sites" id="natural" onclick="checkboxFunction()">Natural sites<br>
                         <input type="checkbox" name="Cultural_sites" id="cultural" onclick="checkboxFunction()">Cultural sites<br>
-                        <input type="checkbox" name="Mixed_sites" id="mixed"onclick="checkboxFunction()">Mixed Sites<br>
+                        <input type="checkbox" name="Mixed_sites" id="mixed"onclick="checkboxFunction()">Mixed Sites (both of natural and cultural importance)<br>
                     </form>
 		        </div>
 			</div>
