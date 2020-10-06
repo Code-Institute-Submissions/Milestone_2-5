@@ -263,7 +263,14 @@ function initMap() {
     }
 ],
 });
+    let naturalSites = myData.items.filter(myData => myData.category === "Natural");
+    document.getElementById("natural").value = naturalSites;
 
+    let culturalSites = myData.items.filter(myData => myData.category === "Cultural");
+    document.getElementById("cultural").value = culturalSites;
+
+    let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
+    document.getElementById("mixed").value = mixedSites;
 //---markers of sites by type (latitude and longitude)
 
 let locationsNatural = [];
@@ -301,17 +308,18 @@ let this_locationMixed={};
 
 //---all markers
 
-    let locations = [];
+    let locations = locationsMixed.concat(locationsCultural, locationsNatural);
+    //let locations=[];
+    console.log(locations);
+   /* let this_location= {};
 
-    let this_location= {};
-
-    for (let i=0; i<myData.items.length ; i++){
-        this_location = {
+   for (let i=0; i<myData.items.length ; i++){
+      this_location = {
             lat: parseFloat(myData.items[i].latitude),
             lng: parseFloat(myData.items[i].longitude),
         }
-        locations.push(this_location);
-    };
+       locations.push(this_location);
+    };*/
 
     //---infowindows content
     //site names
@@ -321,9 +329,9 @@ let this_locationMixed={};
         siteList=myData.items[i].site;
         contentList.push(siteList);
         };
-    
+    console.log(contentList) //this is an array
     let contentItems=contentList.toString();
-    console.log(contentItems)
+    console.log(contentItems) //this is a string-I need a string to diplay on the map
    
     // short descriptions
     let descriptionsList=[];
@@ -334,14 +342,25 @@ let this_locationMixed={};
         };
     
     let descriptions=descriptionsList.toString();
-    console.log(descriptions);
+    console.log(descriptions); //this is a string-I need a string to diplay on the map
+
+// urls
+    let urlsList=[];
+    let urlItemList ={};
+        for (let i = 0; i < myData.items.length; i++){
+        urlItemList=myData.items[i].http_url;
+        urlsList.push(urlItemList);
+        };
+    
+    let urls=urlsList.toString();
+    console.log(urls); //this is a string-I need a string to diplay on the map
+
 
     let contentString={};
     for (let i = 0; i < contentItems.length; i++){
         contentString = contentItems[i];
     };
-
-   console.log(contentString);
+   console.log(contentString); //t!!!!!!!?????
 
     let infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -374,20 +393,31 @@ let this_locationMixed={};
 
 //---Checkboxes
 
-    let naturalSites = myData.items.filter(myData => myData.category === "Natural");
-    document.getElementById("natural").value = naturalSites;
-
-    let culturalSites = myData.items.filter(myData => myData.category === "Cultural");
-    document.getElementById("cultural").value = culturalSites;
-
-    let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
-    document.getElementById("mixed").value = mixedSites;
-
 function checkboxFunction() {
-  $("natural").click(function(){
-    $("locationsCultural", "locationsMixed").hide;
-});
-}
+//set initial state.
+    $('#natural').val(this.checked);
+    $('#cultural').val(this.checked);
+    $('#mixed').val(this.checked);
+
+    $('#natural').change(function() {
+        if(this.checked) {
+            let returnVal = locationsNatural;
+            $(this).prop("checked", returnVal);
+        }
+        $('#natural').val(this.checked);        
+    });
+
+  /*$(":checkbox").click(function(){
+      if ('#natural'.checked==true){
+          $("locationsMixed", "locationsCultural").hide;
+      }
+      else if ('#cultural'.checked==true){
+          $("locationsNatural", "locationsMixed").hide;
+        }
+      else if ('#mixed'.checked==true){
+          $("locationsCultural", "locationsNatural").hide;
+      }
+    });*/
 
 //Dropdown  https://www.w3schools.com/howto/howto_js_filter_dropdown.asp
 
@@ -410,5 +440,6 @@ function filterFunction() {
     } else {
       a[i].style.display = "none";
     }
-  }
+}
+}
 }
