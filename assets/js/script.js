@@ -84,6 +84,7 @@ if (_.isEmpty(myData)) {
 //---Google maps
 // Markers: https://developers.google.com/maps/documentation/javascript/markers#introduction
 // Info window https://developers.google.com/maps/documentation/javascript/infowindows
+// Style from https://snazzymaps.com/
   
 function initMap() {
     
@@ -93,6 +94,7 @@ function initMap() {
             lat: 46.619261,
             lng: -33.134766
         },
+
         styles:[
             {"featureType": "all",
             "elementType": "all",
@@ -263,6 +265,7 @@ function initMap() {
     }
 ],
 });
+
     let naturalSites = myData.items.filter(myData => myData.category === "Natural");
     document.getElementById("natural").value = naturalSites;
 
@@ -271,7 +274,8 @@ function initMap() {
 
     let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
     document.getElementById("mixed").value = mixedSites;
-//---markers of sites by type (latitude and longitude)
+
+    //---markers of sites by type (latitude and longitude)
 
 let locationsNatural = [];
 let this_locationNatural={};
@@ -393,21 +397,11 @@ let this_locationMixed={};
 
 //---Checkboxes
 
-function checkboxFunction() {
-//set initial state.
-    $('#natural').val(this.checked);
-    $('#cultural').val(this.checked);
-    $('#mixed').val(this.checked);
-
-    $('#natural').change(function() {
-        if(this.checked) {
-            let returnVal = locationsNatural;
-            $(this).prop("checked", returnVal);
-        }
-        $('#natural').val(this.checked);        
-    });
-
-  /*$(":checkbox").click(function(){
+function radioFunction() {
+document.getElementById("natural").value = locationsNatural;
+document.getElementById("cultural").value = locationsCultural;
+document.getElementById("mixed").value = locationsMixed;
+    $(":radio").click(function(){
       if ('#natural'.checked==true){
           $("locationsMixed", "locationsCultural").hide;
       }
@@ -417,7 +411,7 @@ function checkboxFunction() {
       else if ('#mixed'.checked==true){
           $("locationsCultural", "locationsNatural").hide;
       }
-    });*/
+    });
 
 //Dropdown  https://www.w3schools.com/howto/howto_js_filter_dropdown.asp
 
