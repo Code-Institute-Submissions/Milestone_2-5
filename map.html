@@ -23,7 +23,7 @@
 						<a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="list.html">List of sites</a>
+						<a class="nav-link" href="map.html">Map</a>
 					</li>
 				</ul>
 			</div>
@@ -33,29 +33,43 @@
 	</header>
   
   <main>
-  <section >
-        <div class="dropdown">
-                <div class="row no-gutters">
-                    <div class="col-sm button-container">
-                        <button onclick="myFunction()" class="dropbtn btn btn-primary">Search the full list</button>
-                    </div>
-                </div>
-                <div id="myDropdown" class="row no-gutter dropdown-content">
-                    <div class="col-sm">
-                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                        <a href="#"></a>
-                    </div>
-                </div>
+  <!---Options to search map--->
+        <section class="container-fluid">
+			<div class="row no-gutters">
+				<div class="col" id="search">
+					<h2>Plan your visit</h2>
+				</div>
+			</div>
+			<div class="row no-gutters search-criteria">
+				<div class="col">
+					<h4>What kind of site are you looking for?</h4>
+				</div>
+			</div>
+			<div class="row no-gutters search-criteria">
+            <!---source: https://www.w3schools.com/tags/att_input_type_radio.asp>--->
+		        <div class="col-sm">
+                    <form>
+                        <input type="radio" id="natural" name="markerGroups" value="natural">
+                        <label for="natural">Natural sites</label><br>
+                        <input type="radio" id="cultural" name="markerGroups" value="cultural">
+                        <label for="cultural">Cultural sites</label><br>
+                        <input type="radio" id="mixed" name="markerGroups" value="mixed">
+                        <label for="mixed">Mixed Sites (both of natural and cultural importance)</label>
+                    </form>
+		        </div>
+			</div>
+        </section>
+        <section class="container-fluid">
+			<div id="map">
+			</div>
+		</section>
+        <section id="syndication" class="container-fluid">
+            <div id="">
+            <p>
+            Copyright © 1992 - 2020 UNESCO/World Heritage Centre. All rights reserved.
+            </p>
         </div>
-  </section>
-
-  <section id="syndication" class="container-fluid">
-  <div id="">
-    <p>
-      Copyright © 1992 - 2020 UNESCO/World Heritage Centre. All rights reserved.
-    </p>
-  </div>
-  </section> 
+        </section> 
 
     <footer class="container-fluid">
 		<div class="row no-gutters align-items-center">
@@ -93,6 +107,11 @@
 	</script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+	</script>
+      <script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
+    </script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSYJ2guMpg1PY9L3f3Oa94Ox-Ez4A9nEc&callback=initMap">
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.12.0/lodash.min.js"></script>
 	<script src="https://unpkg.com/lowdb@0.17.1/dist/low.min.js"></script>
