@@ -51,7 +51,7 @@ const adapter = new LocalStorage('db');
 
 const db = low(adapter);
 
-ENTITY_ID = 'items';
+const ENTITY_ID = 'items';
 
 function add() {
     db.get(ENTITY_ID)
@@ -85,185 +85,194 @@ if (_.isEmpty(myData)) {
 // Markers: https://developers.google.com/maps/documentation/javascript/markers#introduction
 // Info window https://developers.google.com/maps/documentation/javascript/infowindows
 // Style from https://snazzymaps.com/
-  
+
+function renderData(d) {
+    return `
+        <div id="content">
+            <h1>${d.site}</h1>
+        </div>
+    `;
+}
+
 function initMap() {
-    
+
     let map = new google.maps.Map(document.getElementById('map'), {
         zoom: 3,
         center: {
             lat: 46.619261,
             lng: -33.134766
         },
-        styles:[
-            {"featureType": "all",
-            "elementType": "all",
-            "stylers": [
+        styles: [
             {
-                "visibility": "off"
+                "featureType": "all",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    },
+                    {
+                        "hue": "#59ff00"
+                    }
+                ]
             },
             {
-                "hue": "#59ff00"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#444444"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "administrative",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#444444"
+                    }
+                ]
             },
             {
-                "hue": "#00c6ff"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "landscape",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#00c6ff"
+                    }
+                ]
             },
             {
-                "hue": "#00cfff"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "landscape",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#00cfff"
+                    }
+                ]
             },
             {
-                "hue": "#ff0000"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.attraction",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.attraction",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "poi",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#ff0000"
+                    }
+                ]
             },
             {
-                "hue": "#ff0000"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.attraction",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "poi.attraction",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    }
+                ]
             },
             {
-                "hue": "#ff0000"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.business",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "poi.attraction",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#ff0000"
+                    }
+                ]
             },
             {
-                "hue": "#ff0000"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": -100
+                "featureType": "poi.attraction",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#ff0000"
+                    }
+                ]
             },
             {
-                "lightness": 45
+                "featureType": "poi.business",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#ff0000"
+                    }
+                ]
             },
             {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "road",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "saturation": -100
+                    },
+                    {
+                        "lightness": 45
+                    },
+                    {
+                        "visibility": "on"
+                    }
+                ]
             },
             {
-                "hue": "#00fff5"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#46bcec"
+                "featureType": "road.highway",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
             },
             {
-                "visibility": "on"
+                "featureType": "road.arterial",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#00fff5"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "color": "#46bcec"
+                    },
+                    {
+                        "visibility": "on"
+                    }
+                ]
             }
-        ]
-    }
-],
-});
+        ],
+    });
 
     let naturalSites = myData.items.filter(myData => myData.category === "Natural");
     document.getElementById("natural").value = naturalSites;
@@ -271,146 +280,163 @@ function initMap() {
     let culturalSites = myData.items.filter(myData => myData.category === "Cultural");
     document.getElementById("cultural").value = culturalSites;
 
-    let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
+    let mixedSites = myData.items.filter(myData => myData.category === "Mixed");
     document.getElementById("mixed").value = mixedSites;
 
-//---markers of sites by type
+    //---markers of sites by type
 
-let locationsNatural = [];
-let this_locationNatural = {};
-    for (let i = 0; i < naturalSites.length ; i++){
+    let locationsNatural = [];
+    let this_locationNatural = {};
+    for (let i = 0; i < naturalSites.length; i++) {
         this_locationNatural = {
-            lat: parseFloat(naturalSites[i].latitude),
+            loc: {
+                lat: parseFloat(naturalSites[i].latitude),
             lng: parseFloat(naturalSites[i].longitude),
+            },
+            id: naturalSites[i].id_number
         }
         locationsNatural.push(this_locationNatural);
     };
 
-let locationsCultural = [];
-let this_locationCultural = {};
-    for (let i = 0; i < culturalSites.length ; i++){
+    let locationsCultural = [];
+    let this_locationCultural = {};
+    for (let i = 0; i < culturalSites.length; i++) {
         this_locationCultural = {
-            lat: parseFloat(culturalSites[i].latitude),
-            lng: parseFloat(culturalSites[i].longitude),
+            loc: {
+                lat: parseFloat(culturalSites[i].latitude),
+            lng: parseFloat(culturalSites[i].longitude)
+            },
+            id: culturalSites[i].id_number,
         }
         locationsCultural.push(this_locationCultural);
     };
 
-let locationsMixed = [];
-let this_locationMixed = {};
-    for (let i = 0; i< mixedSites.length ; i++){
-        this_locationMixed= {
-            lat: parseFloat(mixedSites[i].latitude),
+    let locationsMixed = [];
+    let this_locationMixed = {};
+    for (let i = 0; i < mixedSites.length; i++) {
+        this_locationMixed = {
+            loc: {
+                lat: parseFloat(mixedSites[i].latitude),
             lng: parseFloat(mixedSites[i].longitude),
+            },
+            id: mixedSites[i].id_number
         }
         locationsMixed.push(this_locationMixed);
     };
 
     let currentMarker;
 
-//---all markers
+    //---all markers
 
     let locations = locationsMixed.concat(locationsCultural, locationsNatural);
     //let locations=[];
     console.log(locations);
-   /* let this_location= {};
-
-   for (let i=0; i<myData.items.length ; i++){
-      this_location = {
-            lat: parseFloat(myData.items[i].latitude),
-            lng: parseFloat(myData.items[i].longitude),
-        }
-       locations.push(this_location);
-    };*/
+    /* let this_location= {};
+ 
+    for (let i=0; i<myData.items.length ; i++){
+       this_location = {
+             lat: parseFloat(myData.items[i].latitude),
+             lng: parseFloat(myData.items[i].longitude),
+         }
+        locations.push(this_location);
+     };*/
 
     //---infowindows content
-     
-    let iWC=[];
 
-    for (let i = 0; i < myData.items.length; i++){
+    // let iWC = [];
+    // console.log(iWC);
+    // for (let i = 0; i < myData.items.length; i++) {
+
+    //     let titles;
+    //     let descriptions
+    //     let urls;
+
+    //     let contentList = [];
+    //     let siteList = {};
+    //     siteList = myData.items[i].site;
+    //     contentList.push(siteList);
+
+    //     let descriptionsList = [];
+    //     let descrItemList = {};
+    //     descrItemList = myData.items[i].short_description;
+    //     descriptionsList.push(descrItemList);
+
+    //     let urlsList = [];
+    //     let urlItemList = {};
+    //     urlItemList = myData.items[i].http_url;
+    //     urlsList.push(urlItemList);
+
+
+    //     descriptions = descriptionsList.toString();
+    //     titles = contentList.toString();
+    //     urls = urlsList.toString();
+
+
+    //     //site names
+    //     /*let contentList = [];
+    //     let siteList = {};
+    //         for (let i = 0; i < myData.items.length; i++){
+    //         siteList = myData.items[i].site;
+    //         contentList.push(siteList);
+    //         };
+    //     console.log(contentList) //this is an array
+    //     titles  = contentList.toString();
+    //     console.log(titles)                 //=this is a string-I need a string to diplay on the map
     
-        let titles;
-        let descriptions
-        let urls;
-
-        let contentList = [];
-        let siteList = {};
-        siteList = myData.items[i].site;
-        contentList.push(siteList);
+    //     // short descriptions
         
-        let descriptionsList = [];
-        let descrItemList = {};
-        descrItemList = myData.items[i].short_description;
-        descriptionsList.push(descrItemList);
-
-        let urlsList = [];
-        let urlItemList = {};
-        urlItemList = myData.items[i].http_url;
-        urlsList.push(urlItemList);
-
-       
-        descriptions = descriptionsList.toString();
-        titles  = contentList.toString();
-        urls = urlsList.toString();
+    //     let descriptionsList = [];
+    //     let descrItemList = {};
+    //         for (let i = 0; i < myData.items.length; i++){
+    //         descrItemList = myData.items[i].short_description;
+    //         descriptionsList.push(descrItemList);
+    //         };
+    //     descriptions = descriptionsList.toString();
+    //     console.log(descriptions);          //=this is a string-I need a string to diplay on the map
+    
+    //     // urls
         
+    //     let urlsList = [];
+    //     let urlItemList = {};
+    //         for (let i = 0; i < myData.items.length; i++){
+    //         urlItemList = myData.items[i].http_url;
+    //         urlsList.push(urlItemList);
+    //         };
+    //     urls = urlsList.toString();
+    //     console.log(urls);                  //=this is a string-I need a string to diplay on the map
+    // */
 
-    //site names
-    /*let contentList = [];
-    let siteList = {};
-        for (let i = 0; i < myData.items.length; i++){
-        siteList = myData.items[i].site;
-        contentList.push(siteList);
-        };
-    console.log(contentList) //this is an array
-    titles  = contentList.toString();
-    console.log(titles)                 //=this is a string-I need a string to diplay on the map
+    //     let infowindow_content;
+    //     let text;
 
-    // short descriptions
-    
-    let descriptionsList = [];
-    let descrItemList = {};
-        for (let i = 0; i < myData.items.length; i++){
-        descrItemList = myData.items[i].short_description;
-        descriptionsList.push(descrItemList);
-        };
-    descriptions = descriptionsList.toString();
-    console.log(descriptions);          //=this is a string-I need a string to diplay on the map
+    //     infowindow_content = document.createElement('div');
+    //     infowindow_content.appendChild(document.createElement('br'));
+    //     text = document.createElement('text');
+    //     text.textContent = titles, descriptions, urls;
+    //     infowindow_content.appendChild(text);
+    //     iWC.push(infowindow_content);
 
-    // urls
-    
-    let urlsList = [];
-    let urlItemList = {};
-        for (let i = 0; i < myData.items.length; i++){
-        urlItemList = myData.items[i].http_url;
-        urlsList.push(urlItemList);
-        };
-    urls = urlsList.toString();
-    console.log(urls);                  //=this is a string-I need a string to diplay on the map
-*/
+    //     let infowindow = new google.maps.InfoWindow();/*({
+    //     content: contentString
+    //     });*/
 
-        let infowindow_content;
-        let text;
+    // }
 
-        infowindow_content = document.createElement('div');
-        infowindow_content.appendChild(document.createElement('br'));
-        text = document.createElement('text');
-        text.textContent = titles, descriptions, urls;
-        infowindow_content.appendChild(text);
-        iWC.push(infowindow_content);
+    const contentString = '';
 
-    let infowindow = new google.maps.InfoWindow();/*({
-        content: contentString
-        });*/
-    
-    }
-    let icon="https://img.icons8.com/nolan/64/unesco.png";
+    const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+    });
+
+    let icon = "https://img.icons8.com/nolan/64/unesco.png";
     let markers = locations.map(function (location, i) {
         return new google.maps.Marker({
-            position: location,
+            position: location.loc,
             map: map,
-            icon: icon,       
+            icon: icon,
+            id: location.id
         });
-    }); 
+    });
 
     markers.forEach((marker) => {
         marker.addListener("mouseover", (event) => {
@@ -418,15 +444,16 @@ let this_locationMixed = {};
             console.log(marker);
             currentMarker = marker;
             infowindow.open(map, marker);
-            infowindow.setContent(iWC[i]);
+            const item = myData.items.find((d) => d.id_number === marker.id);
+            infowindow.setContent(renderData(item));
         });
-         marker.addListener("click", (event) => {
+        marker.addListener("click", (event) => {
             console.log(event);
             console.log(marker);
             currentMarker = marker;
             map.setZoom(10);
             map.setCenter(marker.getPosition());
-         });
+        });
     });
 
     let markerCluster = new MarkerClusterer(map, markers, {
@@ -438,18 +465,18 @@ let this_locationMixed = {};
 //---Radio buttons
 
 function radioFunction() {
-document.getElementById("natural").value = locationsNatural;
-document.getElementById("cultural").value = locationsCultural;
-document.getElementById("mixed").value = locationsMixed;
-    $(":radio").click(function(){
-      if ('#natural'.checked==true){
-          $("locationsMixed", "locationsCultural").hide;
-      }
-      else if ('#cultural'.checked==true){
-          $("locationsNatural", "locationsMixed").hide;
+    document.getElementById("natural").value = locationsNatural;
+    document.getElementById("cultural").value = locationsCultural;
+    document.getElementById("mixed").value = locationsMixed;
+    $(":radio").click(function () {
+        if ('#natural'.checked == true) {
+            $("locationsMixed", "locationsCultural").hide;
         }
-      else if ('#mixed'.checked==true){
-          $("locationsCultural", "locationsNatural").hide;
-      }
+        else if ('#cultural'.checked == true) {
+            $("locationsNatural", "locationsMixed").hide;
+        }
+        else if ('#mixed'.checked == true) {
+            $("locationsCultural", "locationsNatural").hide;
+        }
     });
 }
