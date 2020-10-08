@@ -94,7 +94,6 @@ function initMap() {
             lat: 46.619261,
             lng: -33.134766
         },
-
         styles:[
             {"featureType": "all",
             "elementType": "all",
@@ -275,12 +274,12 @@ function initMap() {
     let mixedSites = myData.items.filter(myData=> myData.category === "Mixed");
     document.getElementById("mixed").value = mixedSites;
 
-    //---markers of sites by type (latitude and longitude)
+//---markers of sites by type
 
 let locationsNatural = [];
-let this_locationNatural={};
-    for (let i=0; i< naturalSites.length ; i++){
-        this_locationNatural= {
+let this_locationNatural = {};
+    for (let i = 0; i < naturalSites.length ; i++){
+        this_locationNatural = {
             lat: parseFloat(naturalSites[i].latitude),
             lng: parseFloat(naturalSites[i].longitude),
         }
@@ -288,9 +287,9 @@ let this_locationNatural={};
     };
 
 let locationsCultural = [];
-let this_locationCultural={};
-    for (let i=0; i< culturalSites.length ; i++){
-        this_locationCultural= {
+let this_locationCultural = {};
+    for (let i = 0; i < culturalSites.length ; i++){
+        this_locationCultural = {
             lat: parseFloat(culturalSites[i].latitude),
             lng: parseFloat(culturalSites[i].longitude),
         }
@@ -298,15 +297,14 @@ let this_locationCultural={};
     };
 
 let locationsMixed = [];
-let this_locationMixed={};
-    for (let i=0; i< mixedSites.length ; i++){
+let this_locationMixed = {};
+    for (let i = 0; i< mixedSites.length ; i++){
         this_locationMixed= {
             lat: parseFloat(mixedSites[i].latitude),
             lng: parseFloat(mixedSites[i].longitude),
         }
         locationsMixed.push(this_locationMixed);
     };
-
 
     let currentMarker;
 
@@ -326,68 +324,109 @@ let this_locationMixed={};
     };*/
 
     //---infowindows content
+     
+    let iWC=[];
+
+    for (let i = 0; i < myData.items.length; i++){
+    
+        let titles;
+        let descriptions
+        let urls;
+
+        let contentList = [];
+        let siteList = {};
+        siteList = myData.items[i].site;
+        contentList.push(siteList);
+        
+        let descriptionsList = [];
+        let descrItemList = {};
+        descrItemList = myData.items[i].short_description;
+        descriptionsList.push(descrItemList);
+
+        let urlsList = [];
+        let urlItemList = {};
+        urlItemList = myData.items[i].http_url;
+        urlsList.push(urlItemList);
+
+       
+        descriptions = descriptionsList.toString();
+        titles  = contentList.toString();
+        urls = urlsList.toString();
+        
+
     //site names
-    let contentList=[];
-    let siteList ={};
+    /*let contentList = [];
+    let siteList = {};
         for (let i = 0; i < myData.items.length; i++){
-        siteList=myData.items[i].site;
+        siteList = myData.items[i].site;
         contentList.push(siteList);
         };
     console.log(contentList) //this is an array
-    let contentItems=contentList.toString();
-    console.log(contentItems) //this is a string-I need a string to diplay on the map
-   
+    titles  = contentList.toString();
+    console.log(titles)                 //=this is a string-I need a string to diplay on the map
+
     // short descriptions
-    let descriptionsList=[];
-    let descrItemList ={};
+    
+    let descriptionsList = [];
+    let descrItemList = {};
         for (let i = 0; i < myData.items.length; i++){
-        descrItemList=myData.items[i].short_description;
+        descrItemList = myData.items[i].short_description;
         descriptionsList.push(descrItemList);
         };
-    
-    let descriptions=descriptionsList.toString();
-    console.log(descriptions); //this is a string-I need a string to diplay on the map
+    descriptions = descriptionsList.toString();
+    console.log(descriptions);          //=this is a string-I need a string to diplay on the map
 
-// urls
-    let urlsList=[];
-    let urlItemList ={};
+    // urls
+    
+    let urlsList = [];
+    let urlItemList = {};
         for (let i = 0; i < myData.items.length; i++){
-        urlItemList=myData.items[i].http_url;
+        urlItemList = myData.items[i].http_url;
         urlsList.push(urlItemList);
         };
-    
-    let urls=urlsList.toString();
-    console.log(urls); //this is a string-I need a string to diplay on the map
+    urls = urlsList.toString();
+    console.log(urls);                  //=this is a string-I need a string to diplay on the map
+*/
 
+        let infowindow_content;
+        let text;
 
-    let contentString={};
-    for (let i = 0; i < contentItems.length; i++){
-        contentString = contentItems[i];
-    };
-   console.log(contentString); //t!!!!!!!?????
+        infowindow_content = document.createElement('div');
+        infowindow_content.appendChild(document.createElement('br'));
+        text = document.createElement('text');
+        text.textContent = titles, descriptions, urls;
+        infowindow_content.appendChild(text);
+        iWC.push(infowindow_content);
 
-    let infowindow = new google.maps.InfoWindow({
+    let infowindow = new google.maps.InfoWindow();/*({
         content: contentString
-        });
-
+        });*/
+    
+    }
     let icon="https://img.icons8.com/nolan/64/unesco.png";
     let markers = locations.map(function (location, i) {
         return new google.maps.Marker({
             position: location,
             map: map,
-            icon: icon,          
+            icon: icon,       
         });
     }); 
 
     markers.forEach((marker) => {
-        marker.addListener("click", (event) => {
+        marker.addListener("mouseover", (event) => {
+            console.log(event);
+            console.log(marker);
+            currentMarker = marker;
+            infowindow.open(map, marker);
+            infowindow.setContent(iWC[i]);
+        });
+         marker.addListener("click", (event) => {
             console.log(event);
             console.log(marker);
             currentMarker = marker;
             map.setZoom(10);
             map.setCenter(marker.getPosition());
-            infowindow.open(map, marker);
-        });
+         });
     });
 
     let markerCluster = new MarkerClusterer(map, markers, {
@@ -395,7 +434,8 @@ let this_locationMixed={};
     });
 }
 
-//---Checkboxes
+
+//---Radio buttons
 
 function radioFunction() {
 document.getElementById("natural").value = locationsNatural;
@@ -412,28 +452,4 @@ document.getElementById("mixed").value = locationsMixed;
           $("locationsCultural", "locationsNatural").hide;
       }
     });
-
-//Dropdown  https://www.w3schools.com/howto/howto_js_filter_dropdown.asp
-
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-function filterFunction() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown");
-  a = function(){
-      $("a:href").val('contentItems');
-  }
-  for (i = 0; i < a.length; i++) {
-    txtValue = a[i].textContent || a[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
-    } else {
-      a[i].style.display = "none";
-    }
-}
-}
 }
