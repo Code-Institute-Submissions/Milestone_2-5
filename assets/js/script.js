@@ -90,6 +90,8 @@ function renderData(d) {
     return `
         <div id="content">
             <h1>${d.site}</h1>
+            <p>${d.short_description}</p}
+            <a>${d.http_url}</a>
         </div>
     `;
 }
@@ -326,101 +328,10 @@ function initMap() {
 
     let currentMarker;
 
-    //---all markers
+    //---markers
 
     let locations = locationsMixed.concat(locationsCultural, locationsNatural);
-    //let locations=[];
     console.log(locations);
-    /* let this_location= {};
- 
-    for (let i=0; i<myData.items.length ; i++){
-       this_location = {
-             lat: parseFloat(myData.items[i].latitude),
-             lng: parseFloat(myData.items[i].longitude),
-         }
-        locations.push(this_location);
-     };*/
-
-    //---infowindows content
-
-    // let iWC = [];
-    // console.log(iWC);
-    // for (let i = 0; i < myData.items.length; i++) {
-
-    //     let titles;
-    //     let descriptions
-    //     let urls;
-
-    //     let contentList = [];
-    //     let siteList = {};
-    //     siteList = myData.items[i].site;
-    //     contentList.push(siteList);
-
-    //     let descriptionsList = [];
-    //     let descrItemList = {};
-    //     descrItemList = myData.items[i].short_description;
-    //     descriptionsList.push(descrItemList);
-
-    //     let urlsList = [];
-    //     let urlItemList = {};
-    //     urlItemList = myData.items[i].http_url;
-    //     urlsList.push(urlItemList);
-
-
-    //     descriptions = descriptionsList.toString();
-    //     titles = contentList.toString();
-    //     urls = urlsList.toString();
-
-
-    //     //site names
-    //     /*let contentList = [];
-    //     let siteList = {};
-    //         for (let i = 0; i < myData.items.length; i++){
-    //         siteList = myData.items[i].site;
-    //         contentList.push(siteList);
-    //         };
-    //     console.log(contentList) //this is an array
-    //     titles  = contentList.toString();
-    //     console.log(titles)                 //=this is a string-I need a string to diplay on the map
-    
-    //     // short descriptions
-        
-    //     let descriptionsList = [];
-    //     let descrItemList = {};
-    //         for (let i = 0; i < myData.items.length; i++){
-    //         descrItemList = myData.items[i].short_description;
-    //         descriptionsList.push(descrItemList);
-    //         };
-    //     descriptions = descriptionsList.toString();
-    //     console.log(descriptions);          //=this is a string-I need a string to diplay on the map
-    
-    //     // urls
-        
-    //     let urlsList = [];
-    //     let urlItemList = {};
-    //         for (let i = 0; i < myData.items.length; i++){
-    //         urlItemList = myData.items[i].http_url;
-    //         urlsList.push(urlItemList);
-    //         };
-    //     urls = urlsList.toString();
-    //     console.log(urls);                  //=this is a string-I need a string to diplay on the map
-    // */
-
-    //     let infowindow_content;
-    //     let text;
-
-    //     infowindow_content = document.createElement('div');
-    //     infowindow_content.appendChild(document.createElement('br'));
-    //     text = document.createElement('text');
-    //     text.textContent = titles, descriptions, urls;
-    //     infowindow_content.appendChild(text);
-    //     iWC.push(infowindow_content);
-
-    //     let infowindow = new google.maps.InfoWindow();/*({
-    //     content: contentString
-    //     });*/
-
-    // }
 
     const contentString = '';
 
