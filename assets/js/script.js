@@ -44,7 +44,6 @@ function xmlToJson(xml) {
 }
 
 //--- Creating local storage for data
-
 // Lowdb code example: see https://github.com/typicode/lowdb
 
 const adapter = new LocalStorage('db');
@@ -89,9 +88,9 @@ if (_.isEmpty(myData)) {
 function renderData(d) {
     return `
         <div id="content">
-            <h1>${d.site}</h1>
+            <h6>${d.site}</h6>
             <p>${d.short_description}</p}
-            <a>${d.http_url}</a>
+            <a href="${d.http_url}">Find out more<a>
         </div>
     `;
 }
@@ -276,6 +275,8 @@ function initMap() {
         ],
     });
 
+    //---markers of sites by type
+
     let naturalSites = myData.items.filter(myData => myData.category === "Natural");
     document.getElementById("natural").value = naturalSites;
 
@@ -284,8 +285,6 @@ function initMap() {
 
     let mixedSites = myData.items.filter(myData => myData.category === "Mixed");
     document.getElementById("mixed").value = mixedSites;
-
-    //---markers of sites by type
 
     let locationsNatural = [];
     let this_locationNatural = {};
@@ -335,8 +334,8 @@ function initMap() {
 
     const contentString = '';
 
-    const infowindow = new google.maps.InfoWindow({
-        content: contentString,
+      const infowindow = new google.maps.InfoWindow({
+      content: contentString,
     });
 
     let icon = "https://img.icons8.com/nolan/64/unesco.png";
@@ -374,20 +373,20 @@ function initMap() {
 
 
 //---Radio buttons
-
-function radioFunction() {
     document.getElementById("natural").value = locationsNatural;
     document.getElementById("cultural").value = locationsCultural;
     document.getElementById("mixed").value = locationsMixed;
+
+    function radioFunction() {
     $(":radio").click(function () {
         if ('#natural'.checked == true) {
-            $("locationsMixed", "locationsCultural").hide;
+            return $("locationsMixed", "locationsCultural").hide;
         }
         else if ('#cultural'.checked == true) {
-            $("locationsNatural", "locationsMixed").hide;
+            return $("locationsNatural", "locationsMixed").hide;
         }
         else if ('#mixed'.checked == true) {
-            $("locationsCultural", "locationsNatural").hide;
+           return $("locationsCultural", "locationsNatural").hide;
         }
     });
 }

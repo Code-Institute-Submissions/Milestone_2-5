@@ -49,12 +49,10 @@
             <!---source: https://www.w3schools.com/tags/att_input_type_radio.asp>--->
 		        <div class="col-sm">
                     <form>
-                        <input type="radio" id="natural" name="markerGroups" value="natural" onclick="if(this.checked){radioFunction()}">
-                        <label for="natural">Natural sites</label><br>
-                        <input type="radio" id="cultural" name="markerGroups" value="cultural" onclick="if(this.checked){radioFunction()}">
-                        <label for="cultural">Cultural sites</label><br>
-                        <input type="radio" id="mixed" name="markerGroups" value="mixed" onclick="if(this.checked){radioFunction()}">
-                        <label for="mixed">Mixed Sites (both of natural and cultural importance)</label>
+                        <label><input type="radio" name="markerGroups" value="*" checked="checked"/> Show all</label><br>
+                        <label><input type="radio" id="natural" name="markerGroups" value="natural">Natural sites</label><br>
+                        <label><input type="radio" id="cultural" name="markerGroups" value="cultural">Cultural sites</label><br>
+                        <label><input type="radio" id="mixed" name="markerGroups" value="mixed">Mixed Sites (both of natural and cultural importance)</label><br>
                     </form>
 		        </div>
 			</div>
