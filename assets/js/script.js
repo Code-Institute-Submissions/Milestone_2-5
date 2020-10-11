@@ -369,24 +369,22 @@ function initMap() {
     let markerCluster = new MarkerClusterer(map, markers, {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
-}
-
 
 //---Radio buttons
-    document.getElementById("natural").value = locationsNatural;
-    document.getElementById("cultural").value = locationsCultural;
-    document.getElementById("mixed").value = locationsMixed;
+    document.getElementById("natural").value = locationsNatural.loc;
+    document.getElementById("cultural").value = locationsCultural.loc;
+    document.getElementById("mixed").value = locationsMixed.loc;
 
-    function radioFunction() {
-    $(":radio").click(function () {
-        if ('#natural'.checked == true) {
-            return $("locationsMixed", "locationsCultural").hide;
-        }
-        else if ('#cultural'.checked == true) {
-            return $("locationsNatural", "locationsMixed").hide;
-        }
-        else if ('#mixed'.checked == true) {
-           return $("locationsCultural", "locationsNatural").hide;
-        }
+
+   $("input").click(function(){
+       if ('#natural'.checked == true) {
+        $("markers.locations.locationsCultural", "markers.locations.locationsMixed").hide();
+       };
+      if ('#cultural'.checked == true) {
+         $("markers.locations.locationsNatural", "markers.locations.locationsMixed").hide();
+       };
+       if ('#mixed'.checked == true) {
+         $("markers.locations.locationsNatural", "markers.locations.locationsCultural").hide();
+       };
     });
 }

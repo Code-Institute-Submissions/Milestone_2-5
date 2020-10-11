@@ -44,14 +44,20 @@ The website consists of 2 pages:
 ### Skeleton
 Wireframes
 
+![Homepage](/assets/images/Home.png "Homepage on large screen size")
+![Homepage on mobile](/assets/images/Home_mobile.png "Homepage on small screen size")
+![Map page](/assets/images/Map.png "Map on large screen size")
+![Map on mobile](/assets/images/Map_mobile.png "Map on small screen size")
 
 ### Surface
 
 The colour scheme on both pages is similar to Unesco's with the exception of the header which is black in order to provide contrast to the white background of the body and the bright blue accents.
 The body of the home page has an image on the left and text on the right hand side of the page. The copyright information is displayed on the bottom of the page right above the footer, but still clearly visible.
+The map has unique styling that highlights points of interests and transport links.
 
 
 ## User stories
+
 As User 1 I am an experienced traveller and I would be looking for ideas for my next holiday. I am willing to travel far away to see something new and remarkable.
 
 As User 2 I am a student and I am doing a research on the preservation of historic monuments for my thesis. I am looking for good examples I can use in my project.
@@ -74,11 +80,12 @@ Footer- Contains links to social media pages. This is currently the c
 
 
 ## Technologies Used
+
 HTML 
 CSS 
 Bootstrap v 4.5.0 for advanced styling and positioning. This includes the grid structure and parts of the navigation.
 Javascript and Jquery for DOM manipulation.
-LowDB to create local database, which was necessary due to the large number of data used.
+LowDB to create local database.
 
 ## Testing
 ### Testing in different browsers
@@ -86,24 +93,39 @@ LowDB to create local database, which was necessary due to the large number of d
 1.  User 1 can browse the entire map and check each information displayed when hovering over with the mouse  to see which one is of interest to them.
 2.  User 2 the student can choose a preferred site type by using the radio buttons and following the link found in the info window appearing on mouse hover they can get to the site specific webpage of the UNESCO World Heritage Centre's website where they can get detailed information including history and significance.
 3.  User 3 the person planning the short trip can focus the map on their own country and see what's nearby and what points of interests are also available in their area.
-### Defensive testing
+
+### Validation
+
+HTML validation: https://validator.w3.org/  was used to validate the HTML code.
+CS validation: https://jigsaw.w3.org/css-validator/ was used to validate the CSS code.
+JavaScript validation: https://jshint.com/ was used to check the JavaScript code.
+
+## Problems encountered
+
+1. Large number of data used from external source, which caused delays in loading the site. This was overcome by using local storage.
+2. Understanding and using the data structure was a challenge overall and proved to be the most time-consuming part of the process.
+2. Google maps infowindow contents are not as intended, used each location's id to access the required data string.
 
 ## Deployment
-I built the html of the website and did the styling using CSS on Repl.it then created the repository on GitHub where I commited important development stages and stages of any progress.
-My website is currently deployed on Github Pages - https://kittikovacs.github.io/milestone1/ directly from the master branch.
 
-## Credits
-Content
+I built the html of the website and did the styling using CSS on Repl.it then created the repository https://github.com/KittiKovacs/Milestone_2 on GitHub where I created the current file structure and added the code created on the Repl.it platform.
+I commited important development stages and any progress by using git commit and pushed them to the master branch.
+As a next step I published the website on GitHub pages at https://kittikovacs.github.io/Milestone_2/ .
+All commits after every important update has been added to my site on GitHub pages where my project is currently deployed.
+
+## Content
+
 UNESCO kindly gave their permission to use their XML data available on their website.
 
 ## Media
-Image sources: [Pexels] https://www.pexels.com/
 
-Icons by Icons8 
-
-Map by Google Maps
+Image sources: [Pexels]https://www.pexels.com/
+Icons by [Icons8] https://icons8.com/
+Maps API by [Google Maps]https://cloud.google.com/maps-platform/
+Map styling from [Snazzymaps]https://snazzymaps.com/
 
 ## Acknowledgements
+
 Many thanks for the permission to UNESCO to use their name, logo and data.
 
 My mentor Guido Cecilio Garcia Bernal had great suggestions and helped me manage the database.
