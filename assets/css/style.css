@@ -67,10 +67,13 @@ body{
   border-top: solid 2px #3f95c3;
   background-color: aliceblue;
 }
+#search h2{
+  margin:20px;
+}
 .search-criteria{
   background-color: aliceblue;
   margin:0 40px;
-  padding-bottom:20px;
+  padding-bottom:5px;
   text-align:center;
 }
 form input{
