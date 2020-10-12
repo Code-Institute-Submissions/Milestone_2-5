@@ -278,13 +278,8 @@ function initMap() {
     //---markers of sites by type
 
     let naturalSites = myData.items.filter(myData => myData.category === "Natural");
-    document.getElementById("natural").value = naturalSites;
-
     let culturalSites = myData.items.filter(myData => myData.category === "Cultural");
-    document.getElementById("cultural").value = culturalSites;
-
     let mixedSites = myData.items.filter(myData => myData.category === "Mixed");
-    document.getElementById("mixed").value = mixedSites;
 
     let locationsNatural = [];
     let this_locationNatural = {};
@@ -327,23 +322,31 @@ function initMap() {
 
     let currentMarker;
     let locations;
+
+    document.getElementById("natural").value = locationsNatural;
+    document.getElementById("cultural").value = locationsCultural;
+    document.getElementById("mixed").value = locationsMixed;
+    
     //---markers
 
-    if ($("#natural:checked")){
+    if ($("#natural").is(":checked")){
         locations = locationsNatural;
+        console.log(natural)
     };
 
-    if ($("#cultural:checked")){
+    if ($("#cultural").is(":checked")){
         locations = locationsCultural;
+        console.log(cultural)
     };
 
-    if ($("#mixed:checked")){
+    if ($("#mixed").is(":checked")){
         locations = locationsMixed; 
+        console.log(mixed)
     };
-     if ($("#all:checked")){
+     if ($("#all").is(":checked")){
         locations = locationsMixed.concat(locationsCultural, locationsNatural); 
     };
-   console.log(locations);
+   console.log(all);
 
     const contentString = '';
 
@@ -382,23 +385,6 @@ function initMap() {
     let markerCluster = new MarkerClusterer(map, markers, {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
-
-//---Radio buttons
-    document.getElementById("natural").value = locationsNatural.loc;
-    document.getElementById("cultural").value = locationsCultural.loc;
-    document.getElementById("mixed").value = locationsMixed.loc;
-
-    console.log(locationsNatural);
-
-   $("input").click(function(){
-       if ('#natural'.checked == true) {
-        $("locationsCultural", "locationsMixed").hide();
-       };
-      if ('#cultural'.checked == true) {
-         $("locationsNatural", "locationsMixed").hide();
-       };
-       if ('#mixed'.checked == true) {
-         $("locationsNatural", "locationsCultural").hide();
-       };
-    });
 }
+
+
