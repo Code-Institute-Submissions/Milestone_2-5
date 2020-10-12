@@ -326,11 +326,24 @@ function initMap() {
     };
 
     let currentMarker;
-
+    let locations;
     //---markers
 
-    let locations = locationsMixed.concat(locationsCultural, locationsNatural);
-    console.log(locations);
+    if ($("#natural:checked")){
+        locations = locationsNatural;
+    };
+
+    if ($("#cultural:checked")){
+        locations = locationsCultural;
+    };
+
+    if ($("#mixed:checked")){
+        locations = locationsMixed; 
+    };
+     if ($("#all:checked")){
+        locations = locationsMixed.concat(locationsCultural, locationsNatural); 
+    };
+   console.log(locations);
 
     const contentString = '';
 
@@ -375,16 +388,17 @@ function initMap() {
     document.getElementById("cultural").value = locationsCultural.loc;
     document.getElementById("mixed").value = locationsMixed.loc;
 
+    console.log(locationsNatural);
 
    $("input").click(function(){
        if ('#natural'.checked == true) {
-        $("markers.locations.locationsCultural", "markers.locations.locationsMixed").hide();
+        $("locationsCultural", "locationsMixed").hide();
        };
       if ('#cultural'.checked == true) {
-         $("markers.locations.locationsNatural", "markers.locations.locationsMixed").hide();
+         $("locationsNatural", "locationsMixed").hide();
        };
        if ('#mixed'.checked == true) {
-         $("markers.locations.locationsNatural", "markers.locations.locationsCultural").hide();
+         $("locationsNatural", "locationsCultural").hide();
        };
     });
 }
