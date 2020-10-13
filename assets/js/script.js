@@ -43,6 +43,35 @@ function xmlToJson(xml) {
     return obj;
 }
 
+function filterData(data) {
+    let naturalSites = [];
+    let culturalSites = [];
+    let mixedSites = [];
+    let locationsNatural = [];
+    let locationsCultural = [];
+    let locationsMixed = [];
+    data.items.forEach((d) => {
+        if (d.category === 'Natural') {
+            naturalSites.push(d);
+            locationsNatural.push({ loc: { lat: parseFloat(d.latitude), lng: parseFloat(d.longitude) }, id: d.id_number });
+        } else if (d.category === 'Cultural') {
+            culturalSites.push(d);
+            locationsCultural.push({ loc: { lat: parseFloat(d.latitude), lng: parseFloat(d.longitude) }, id: d.id_number });
+        } else if (d.category === 'Mixed') {
+            mixedSites.push(d);
+            locationsMixed.push({ loc: { lat: parseFloat(d.latitude), lng: parseFloat(d.longitude) }, id: d.id_number });
+        }
+    });
+    return {
+        naturalSites,
+        culturalSites,
+        mixedSites,
+        locationsNatural,
+        locationsCultural,
+        locationsMixed
+    }
+}
+
 //--- Creating local storage for data
 // Lowdb code example: see https://github.com/typicode/lowdb
 
@@ -52,11 +81,6 @@ const db = low(adapter);
 
 const ENTITY_ID = 'items';
 
-function add() {
-    db.get(ENTITY_ID)
-        .push({ time: Date.now() })
-        .write();
-}
 function reset() {
     db.set(ENTITY_ID, [])
         .write();
@@ -67,23 +91,6 @@ function clearState() {
 function find(query) {
     return db.get(ENTITY_ID).find(query).value();
 }
-console.log(db.getState());
-
-const myData = db.getState();
-
-if (_.isEmpty(myData)) {
-    $.ajax({
-        url: "https://cors-anywhere.herokuapp.com/https://whc.unesco.org/en/list/xml/"
-    }).done((response) => {
-        const data = xmlToJson(response);
-        console.log(data);
-        db.defaults({ items: data.query.row }).write();
-    });
-}
-//---Google maps
-// Markers: https://developers.google.com/maps/documentation/javascript/markers#introduction
-// Info window https://developers.google.com/maps/documentation/javascript/infowindows
-// Style from https://snazzymaps.com/
 
 function renderData(d) {
     return `
@@ -95,8 +102,26 @@ function renderData(d) {
     `;
 }
 
-function initMap() {
+function onSelectSite() {
+    const sdata = db.getState();
+    const filteredData = filterData(sdata);
+    initMap(sdata, filteredData);
 
+    if ($("#natural").is(":checked")) {
+        locations = filteredData.locationsNatural;
+    };
+    if ($("#cultural").is(":checked")) {
+        locations = filteredData.locationsCultural;
+    };
+    if ($("#mixed").is(":checked")) {
+        locations = filteredData.locationsMixed;
+    };
+    if ($("#all").is(":checked")) {
+        locations = filteredData.locationsMixed.concat(filteredData.locationsCultural, filteredData.locationsNatural);
+    };
+}
+
+function initMap(data, filteredData) {
     let map = new google.maps.Map(document.getElementById('map'), {
         zoom: 3,
         center: {
@@ -104,278 +129,228 @@ function initMap() {
             lng: -33.134766
         },
         styles: [
-    {
-        "featureType": "all",
-        "elementType": "all",
-        "stylers": [
             {
-                "visibility": "off"
+                "featureType": "all",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    },
+                    {
+                        "hue": "#59ff00"
+                    }
+                ]
             },
             {
-                "hue": "#59ff00"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#444444"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.country",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "administrative",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#444444"
+                    }
+                ]
             },
             {
-                "color": "#0080ff"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.country",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "administrative.country",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "color": "#0080ff"
+                    }
+                ]
             },
             {
-                "hue": "#f100ff"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "administrative.country",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#f100ff"
+                    }
+                ]
             },
             {
-                "hue": "#00c6ff"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "landscape",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#00c6ff"
+                    }
+                ]
             },
             {
-                "hue": "#00cfff"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "landscape",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#00cfff"
+                    }
+                ]
             },
             {
-                "hue": "#ff0000"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.attraction",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.attraction",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "poi",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#ff0000"
+                    }
+                ]
             },
             {
-                "hue": "#ff0000"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.attraction",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "poi.attraction",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    }
+                ]
             },
             {
-                "hue": "#ff0000"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.business",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "poi.attraction",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#ff0000"
+                    }
+                ]
             },
             {
-                "hue": "#ff0000"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": -100
+                "featureType": "poi.attraction",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#ff0000"
+                    }
+                ]
             },
             {
-                "lightness": 45
+                "featureType": "poi.business",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#ff0000"
+                    }
+                ]
             },
             {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
+                "featureType": "road",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "saturation": -100
+                    },
+                    {
+                        "lightness": 45
+                    },
+                    {
+                        "visibility": "on"
+                    }
+                ]
             },
             {
-                "hue": "#00fff5"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#46bcec"
+                "featureType": "road.highway",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
             },
             {
-                "visibility": "on"
+                "featureType": "road.arterial",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "hue": "#00fff5"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "color": "#46bcec"
+                    },
+                    {
+                        "visibility": "on"
+                    }
+                ]
             }
         ]
-    }
-]
     });
 
-    //---markers of sites by type
+    //---creating content for markers 
 
-    let naturalSites = myData.items.filter(myData => myData.category === "Natural");
-    let culturalSites = myData.items.filter(myData => myData.category === "Cultural");
-    let mixedSites = myData.items.filter(myData => myData.category === "Mixed");
-
-    let locationsNatural = [];
-    let this_locationNatural = {};
-    for (let i = 0; i < naturalSites.length; i++) {
-        this_locationNatural = {
-            loc: {
-                lat: parseFloat(naturalSites[i].latitude),
-            lng: parseFloat(naturalSites[i].longitude),
-            },
-            id: naturalSites[i].id_number
-        }
-        locationsNatural.push(this_locationNatural);
-    };
-
-    let locationsCultural = [];
-    let this_locationCultural = {};
-    for (let i = 0; i < culturalSites.length; i++) {
-        this_locationCultural = {
-            loc: {
-                lat: parseFloat(culturalSites[i].latitude),
-            lng: parseFloat(culturalSites[i].longitude)
-            },
-            id: culturalSites[i].id_number,
-        }
-        locationsCultural.push(this_locationCultural);
-    };
-
-    let locationsMixed = [];
-    let this_locationMixed = {};
-    for (let i = 0; i < mixedSites.length; i++) {
-        this_locationMixed = {
-            loc: {
-                lat: parseFloat(mixedSites[i].latitude),
-            lng: parseFloat(mixedSites[i].longitude),
-            },
-            id: mixedSites[i].id_number
-        }
-        locationsMixed.push(this_locationMixed);
-    };
-
+    
     let currentMarker;
     let locations;
 
-    document.getElementById("natural").value = locationsNatural;
-    document.getElementById("cultural").value = locationsCultural;
-    document.getElementById("mixed").value = locationsMixed;
+    //radio button functionality
+
+   if ($("#natural").is(":checked")) {
+        locations = filteredData.locationsNatural;
+     };
+    if ($("#cultural").is(":checked")) {
+         locations = filteredData.locationsCultural;
+    };
+     if ($("#mixed").is(":checked")) {
+         locations = filteredData.locationsMixed;
+    };
+    if ($("#all").is(":checked")) {
+         locations = filteredData.locationsMixed.concat(filteredData.locationsCultural, filteredData.locationsNatural);
+     };
     
-    //---markers
-
-    if ($("#natural").is(":checked")){
-        locations = locationsNatural;
-        console.log(natural)
-    };
-
-    if ($("#cultural").is(":checked")){
-        locations = locationsCultural;
-        console.log(cultural)
-    };
-
-    if ($("#mixed").is(":checked")){
-        locations = locationsMixed; 
-        console.log(mixed)
-    };
-     if ($("#all").is(":checked")){
-        locations = locationsMixed.concat(locationsCultural, locationsNatural); 
-    };
-   console.log(all);
+    // Markers
 
     const contentString = '';
 
-      const infowindow = new google.maps.InfoWindow({
-      content: contentString,
+    const infowindow = new google.maps.InfoWindow({
+        content: contentString,
     });
 
     let icon = "https://img.icons8.com/nolan/64/unesco.png";
@@ -394,7 +369,7 @@ function initMap() {
             console.log(marker);
             currentMarker = marker;
             infowindow.open(map, marker);
-            const item = myData.items.find((d) => d.id_number === marker.id);
+            const item = data.items.find((d) => d.id_number === marker.id);
             infowindow.setContent(renderData(item));
         });
         marker.addListener("click", (event) => {
@@ -406,9 +381,38 @@ function initMap() {
         });
     });
 
+    // Clustering markers
     let markerCluster = new MarkerClusterer(map, markers, {
         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
     });
 }
 
+function main() {
+    console.log(db.getState());
+    const storedData = db.getState();
+    if (_.isEmpty(storedData)) {
+        $.ajax({
+            url: "https://cors-anywhere.herokuapp.com/https://whc.unesco.org/en/list/xml/"
+        }).done((response) => {
+            const data = xmlToJson(response);
+            console.log(data);
+            db.defaults({ items: data.query.row }).write();
+            const sdata = db.getState();
+            const filteredData = filterData(sdata);
+            initMap(sdata, filteredData);
+        });
+    } else {
+        const filteredData = filterData(storedData);
+        initMap(storedData, filteredData);
+    }
+}
 
+//---Google maps
+// Markers: https://developers.google.com/maps/documentation/javascript/markers#introduction
+// Info window https://developers.google.com/maps/documentation/javascript/infowindows
+// Style from https://snazzymaps.com/
+
+$(document).ready(() => {
+    $('.special-radio').change(onSelectSite);
+    main();
+});

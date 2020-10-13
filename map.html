@@ -51,20 +51,20 @@
 					<h5>What kind of site are you looking for?</h5>
 				</div>
 			</div>
-			<div class="row no-gutters search-criteria">
+			<div class="row no-gutters search-criteria ">
             <!---source: https://www.w3schools.com/tags/att_input_type_radio.asp>--->
-		        <div class="col-sm">
-                    <form>
+		        <div class="col-sm ">
+                    <form class="special-radio">
                         <label><input type="radio" id="natural" name="markerGroups" value="natural" >Natural sites</label><br>
                         <label><input type="radio" id="cultural" name="markerGroups" value="cultural">Cultural sites</label><br>
                         <label><input type="radio" id="mixed" name="markerGroups" value="mixed">Mixed Sites (both of natural and cultural importance)</label><br>
-                        <label><input type="radio" id="all" name="markerGroups" value="*"/> Show all</label><br>
+                        <label><input type="radio" id="all" name="markerGroups" value="*" checked/> Show all</label><br>
                     </form>
 		        </div>
             </div>
             <div class="row no-gutters search-criteria">
                 <div class="col-sm">
-                    <button type="button" class="btn btn-primary" onclick="initMap()">Show on map</button>
+                    <!-- <button type="button" class="btn btn-primary" onclick="initMap()">Show on map</button> -->
                 </div>
 			</div>
         </section>
@@ -119,12 +119,12 @@
 	</script>
       <script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
     </script>
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSYJ2guMpg1PY9L3f3Oa94Ox-Ez4A9nEc&callback=initMap">
-	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.12.0/lodash.min.js"></script>
 	<script src="https://unpkg.com/lowdb@0.17.1/dist/low.min.js"></script>
 	<script src="https://unpkg.com/lowdb@0.17.1/dist/LocalStorage.min.js"></script>
+    <script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSYJ2guMpg1PY9L3f3Oa94Ox-Ez4A9nEc">
+	</script>
 	<script src="assets/js/script.js" crossorigin="anonymous"></script>
 </body>
 
