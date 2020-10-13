@@ -20,7 +20,7 @@ To help others finding new travel destinations.
 
 ## UX
 ### Strategy
-To present a large number of data from an external source in a visually appealing and informative way.
+To present a large number of data from an external source on Google Maps in a visually appealing and informative way.
 
 ### Scope
 Within the scope of the project I have an interactive map that displays markers based on latitude and longitude data from the database.
@@ -37,7 +37,7 @@ This map is to be filtered by the type of the location; this is achieved by hidi
 ### Structure
 The website consists of 2 pages:
 
--Homepage: gives the user a short introduction to the purpose of the website and the work of UNESCO. It contains a copyright notice from UNESCO and features a footer with UNESCO's social media links and reference to Icons8.
+-Homepage: gives the user a short introduction to the purpose of the website and the work of UNESCO. It contains a copyright notice from UNESCO and features a footer with social media links and reference to Icons8.
 
 -Map page: features the map with a marker for each site and an option for the user to filter them by the type of the site. It also features the same footer and links as the Home page.
 
@@ -51,9 +51,13 @@ Wireframes
 
 ### Surface
 
-The colour scheme on both pages is similar to Unesco's with the exception of the header which is black in order to provide contrast to the white background of the body and the bright blue accents.
-The body of the home page has an image on the left and text on the right hand side of the page. The copyright information is displayed on the bottom of the page right above the footer, but still clearly visible.
-The map has unique styling that highlights points of interests and transport links.
+Both pages have a white background with a black header to provide contrast,the bright blue colour used throughout is the same that's used on the World Heritage Centre website.
+On the left side of the header are the two menu items, on the right the site's name.
+The body of the home page has an image on the left and the intro text on the right hand side of the page. The copyright information is displayed on the bottom of the page right above the footer, still clearly visible.
+On small viewports the image is hidden and replaced by the WHC logo and the menu items become a hamburger button.
+
+The map page has the same header and footer as the home page. The body is divided into two parts: the search feature with the radio buttons and the search button, and the map itself. The map has unique styling and colour scheme that highlights points of interests and transport links and the markers have been replaced by the Unesco logo.
+On small viewports the contents shrink to fit the viewport and are aligned to the centre.
 
 
 ## User stories
@@ -68,24 +72,27 @@ As User 3 I am planning a short trip with some sightseeing combined with fo
 
 ### Existing Features
 
-The main feature is the Google map on the “Map” page that contains markers (clustered where necessary) to display the geographical location of each site which is obtained from the main data source. On mouse hover some information pops up over the marker containing the site's name, why it's important and a link to the World Heritage Centre's website. On mouse leave this window disappears. On mouse click the map focuses on the marker/markers.
+The main feature is the Google map on the Map page that contains markers (clustered where necessary) to display the geographical location of each site which is obtained from the main data source. On mouse hover a window pops up over the marker containing the site's name, a short description and a link to the site's own page on the World Heritage Centre's website. On mouse leave this window disappears. On mouse click the map focuses on the marker/markers.
 
-Another feature is the filtering of the markers, this is done by using the radio buttons whereby the user can decide if they want to see only places with natural or cultural or mixed values.
+Another feature is the filtering of the markers, this is done by using the radio buttons whereby the user can decide if they want to see only places with natural or cultural or mixed values, or all of them, then clocking on the button below them.
 
 Header-contains navigation links and the website name. The navigation links change colour when they are active. By clicking on the website name the user is able to return to the main page from the map page.
 
-Footer- Contains links to social media pages. This is currently the company's Facebook page only. The Facebook logo changes colour on mouse hover to indicate that there is an action available. Also contains copyright information.
+Footer- Contains links to the social media pages of the UNESCO World Heritage Center and Google. Also contains copyright information.
 
 ### Features Left to Implement
+
+More search options, by region and/or country.
 
 
 ## Technologies Used
 
 HTML 
 CSS 
-Bootstrap v 4.5.0 for advanced styling and positioning. This includes the grid structure and parts of the navigation.
+Bootstrap v 4.5.0 for advanced styling and positioning. This includes the grid structure and the navigation.
 Javascript and Jquery for DOM manipulation.
 LowDB to create local database.
+Google Maps API
 
 ## Testing
 ### Testing in different browsers
@@ -102,13 +109,12 @@ JavaScript validation: https://jshint.com/ was used to check the JavaScript code
 
 ## Problems encountered
 
-1. Large number of data used from external source, which caused delays in loading the site. This was overcome by using local storage.
-2. Understanding and using the data structure was a challenge overall and proved to be the most time-consuming part of the process.
-2. Google maps infowindow contents are not as intended, used each location's id to access the required data string.
+1. Large number of data used from external source, which caused delays in loading the site. This was overcome by creating local storage.
+2. Understanding and using the data structure was a challenge overall and proved to be the most time-consuming part of the process, this was especially important when creating the markers and the filters.
+2. Google maps infowindow's contents were not displaying the correct information, used each location's id number to access the required data string.
 
 ## Deployment
-
-I built the html of the website and did the styling using CSS on Repl.it then created the repository https://github.com/KittiKovacs/Milestone_2 on GitHub where I created the current file structure and added the code created on the Repl.it platform.
+I started building the HTML of the website and did the styling using CSS on Repl.it then created the repository https://github.com/KittiKovacs/Milestone_2 on GitHub where I created the current file structure and added the code created on the Repl.it platform.
 I commited important development stages and any progress by using git commit and pushed them to the master branch.
 As a next step I published the website on GitHub pages at https://kittikovacs.github.io/Milestone_2/ .
 All commits after every important update has been added to my site on GitHub pages where my project is currently deployed.
@@ -119,7 +125,8 @@ UNESCO kindly gave their permission to use their XML data available on their 
 
 ## Media
 
-Image sources: [Pexels]https://www.pexels.com/
+Image source: [Pexels]https://www.pexels.com/
+Fonts from Google Fonts https://fonts.google.com/
 Icons by [Icons8] https://icons8.com/
 Maps API by [Google Maps]https://cloud.google.com/maps-platform/
 Map styling from [Snazzymaps]https://snazzymaps.com/
