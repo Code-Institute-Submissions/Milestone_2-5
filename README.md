@@ -10,13 +10,16 @@ I wanted to learn how to use Google Maps for something interesting, and while lo
 ### External user's goal
 
 To find potential new holiday destinations that are less widely known.
+
 To learn more about the UNESCO, more specifically the World Heritage Centre and the List.
+
 To find out what's nearby these attractions and start travel planning.
 
 ### Site owner's goal
 
 To support an organization and a cause they agree with.
-To help others finding new travel destinations.
+
+To help others finding new travel destinations and learn more about the world.
 
 ## UX
 ### Strategy
@@ -26,12 +29,14 @@ To present a large number of data from an external source on Google Maps in a vi
 Within the scope of the project I have an interactive map that displays markers based on latitude and longitude data from the database.
 On moving the mouse over a marker it should display information in an infowindow and contain a link to an external site.
 On clicking on the marker/marker cluster the map focuses on the selected elements.
-This map is to be filtered by the type of the location; this is achieved by hiding markers displayed by default by using radio buttons.
+This map is filtered by the type of the location; this is achieved by using radio buttons to reveal relevant markers.
 
 #### Outside of scope:
 
 - Authentication is not necessary as users can't contribute to the page or share information.
+
 - Featuring personal or business details as the page is for non-commercial use.
+
 - Image gallery as the UNESCO website already contains these and the links in the footer point to social media sites like Instagram which is more suitable for this purpose.
 
 ### Structure
@@ -45,8 +50,11 @@ The website consists of 2 pages:
 Wireframes
 
 ![Homepage](/assets/images/Home.png "Homepage on large screen size")
+
 ![Homepage on mobile](/assets/images/Home_mobile.png "Homepage on small screen size")
+
 ![Map page](/assets/images/Map.png "Map on large screen size")
+
 ![Map on mobile](/assets/images/Map_mobile.png "Map on small screen size")
 
 ### Surface
@@ -82,16 +90,23 @@ Footer- Contains links to the social media pages of the UNESCO World Herit
 
 ### Features Left to Implement
 
-More search options, by region and/or country.
+- More filter options, by region and/or country.
+
+- Allow users to create an account and to save places, comment and upload their own photos.
 
 
 ## Technologies Used
 
 HTML 
+
 CSS 
+
 Bootstrap v 4.5.0 for advanced styling and positioning. This includes the grid structure and the navigation.
+
 Javascript and Jquery for DOM manipulation.
+
 LowDB to create local database.
+
 Google Maps API
 
 ## Testing
@@ -104,7 +119,9 @@ Google Maps API
 ### Validation
 
 HTML validation: https://validator.w3.org/  was used to validate the HTML code.
-CS validation: https://jigsaw.w3.org/css-validator/ was used to validate the CSS code.
+
+CSS validation: https://jigsaw.w3.org/css-validator/ was used to validate the CSS code.
+
 JavaScript validation: https://jshint.com/ was used to check the JavaScript code.
 
 ## Problems encountered
@@ -126,9 +143,13 @@ UNESCO kindly gave their permission to use their XML data available on their 
 ## Media
 
 Image source: [Pexels]https://www.pexels.com/
+
 Fonts from Google Fonts https://fonts.google.com/
+
 Icons by [Icons8] https://icons8.com/
+
 Maps API by [Google Maps]https://cloud.google.com/maps-platform/
+
 Map styling from [Snazzymaps]https://snazzymaps.com/
 
 ## Acknowledgements
