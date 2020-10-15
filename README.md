@@ -55,7 +55,7 @@ Wireframes
 
 ![Map page](/assets/images/Map.png "Map on large screen size")
 
-![Map on mobile](/assets/images/Map_mobile.png"Map on small screen size")
+![Map on mobile](/assets/images/Map_mobile.png "Map on small screen size")
 
 ### Surface
 
