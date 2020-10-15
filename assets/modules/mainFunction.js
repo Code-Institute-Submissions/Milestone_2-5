@@ -1,3 +1,8 @@
+import {xmlToJson} from './xmlToJSON.js';
+import {filterData} from './dataFiltering.js';
+import {db} from './localStorage.js';
+import {initMap} from './map.js';
+
 function main() {
     console.log(db.getState());
     const storedData = db.getState();

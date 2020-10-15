@@ -1,3 +1,7 @@
+import {filterData} from './dataFiltering.js';
+import {db} from './localStorage.js';
+import {initMap} from './map.js';
+
 //marker infowindow structure
 
 function renderData(d) {

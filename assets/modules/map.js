@@ -1,3 +1,5 @@
+import {renderData} from './renderData.js';
+
 function initMap(data, filteredData) {
     let map = new google.maps.Map(document.getElementById('map'), {
         zoom: 3,
