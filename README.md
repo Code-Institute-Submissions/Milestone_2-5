@@ -49,13 +49,13 @@ The website consists of 2 pages:
 ### Skeleton
 Wireframes
 
-[Homepage](/assets/images/Home.png "Homepage on large screen size")
+![Homepage](/assets/images/Home.png "Homepage on large screen size")
 
-[Homepage on mobile](/assets/images/Home_mobile.png "Homepage on small screen size")
+![Homepage on mobile](/assets/images/Home_mobile.png "Homepage on small screen size")
 
-[Map page](/assets/images/Map.png "Map on large screen size")
+![Map page](/assets/images/Map.png "Map on large screen size")
 
-[Map on mobile](/assets/images/Map_mobile.png "Map on small screen size")
+![Map on mobile](/assets/images/Map_mobile.png "Map on small screen size")
 
 ### Surface
 
@@ -64,8 +64,14 @@ On the left side of the header are the two menu items, on the right the site's n
 The body of the home page has an image on the left and the intro text on the right hand side of the page. The copyright information is displayed on the bottom of the page.
 On small viewports the image is hidden and replaced by the WHC logo and the menu items become a hamburger button.
 
+![Homepage screenshot1](/assets/images/home1.png "Homepage screenshots") 
+
+![Homepage screenshot2](/assets/images/home2.png "Homepage screenshots")
+
 The map page has the same header and footer as the home page. The body is divided into two parts: the search feature with the radio buttons and the map itself. The map has unique styling and colour scheme that highlights points of interests and transport links and the markers have been replaced by the Unesco logo.
 On small viewports the contents shrink to fit the viewport and aligns to the centre.
+
+![Map screenshot1](/assets/images/map1.png "Map screenshot with console")
 
 
 ## User stories
@@ -82,7 +88,17 @@ As User 3 I am planning a short trip with some sightseeing combined with fo
 
 The main feature is the Google map on the Map page that contains markers (clustered where necessary) to display the geographical location of each site which is obtained from the main data source. On mouse hover a window pops up over the marker containing the site's name, a short description and a link to the site's own page on the World Heritage Centre's website. On mouse leave this window disappears. On mouse click the map focuses on the marker/markers.
 
+![Map screenshot4](/assets/images/all_markers.png "Features1")
+
+![Map screenshot5](/assets/images/marker_zoom.png "Features2")
+
 Another feature is the filtering of the markers, this is done by using the radio buttons whereby the user can decide if they want to see only places with natural or cultural or mixed values, or all of them.
+
+![Map screenshot6](/assets/images/filter1.png "Features3")
+
+![Map screenshot7](/assets/images/filter2.png "Features4")
+
+![Map screenshot7](/assets/images/filter3.png "Features5")
 
 Header-contains navigation links and the website name. The navigation links change colour when they are active. By clicking on the website name the user is able to return to the main page from the map page.
 
@@ -113,8 +129,16 @@ Google Maps API
 ### Testing in different browsers
 ### Testing against the user stories
 1.  User 1 can browse the entire map and check each information displayed when hovering over with the mouse  to see which one is of interest to them.
+
+![Map screenshot2](/assets/images/marker.png "Map screenshot1 User1")
+
 2.  User 2 the student can choose a preferred site type by using the radio buttons and following the link found in the info window appearing on mouse hover they can get to the site specific webpage of the UNESCO World Heritage Centre's website where they can get detailed information including history and significance.
+
+![Map screenshot3](/assets/images/link.png "Map screenshot1 User2") 
+
 3.  User 3 the person planning the short trip can focus the map on their own country and see what's nearby and what points of interests are also available in their area.
+
+![Map screenshot3](/assets/images/zoom.png "Map screenshot1 User3")
 
 ### Validation
 
