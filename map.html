@@ -4,14 +4,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="travel, UNESCO, World Heritage Sites, preservation, culture, map">
+	<meta name="keywords" content="travel, UNESCO, World Heritage Sites, preservation, culture, map">
 	<meta name="Description"
 		content="WonderList is an interactive website created to showcase and celebrate our common heritage.">
-    <link rel="icon" type="image/png" sizes="64x64" href="assets/images/globe.png">
+	<link rel="icon" type="image/png" sizes="64x64" href="assets/images/globe.png">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Megrim&display=swap" rel="stylesheet">
-	<link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css">
 	<title>WonderList</title>
 </head>
 
@@ -32,19 +32,20 @@
 				</ul>
 			</div>
 			<a class="navbar-brand"
-				href="index.html">WonderList<img src="https://img.icons8.com/dusk/64/000000/world-map.png"/ alt="WonderList"></a>
+				href="index.html">WonderList<img src="https://img.icons8.com/dusk/64/000000/world-map.png" alt="WonderList"></a>
 		</nav>
 	</header>
-  
-  <main>
-  <!---Options to search map--->
-        <section class="container-fluid">
+
+	<main>
+		<!--Options to search map-->
+		<section class="container-fluid">
 			<div class="row no-gutters">
 				<div class="col" id="search">
 					<h2>The List</h2>
-                    <h5>Each marker  below represents a World Heritage Site.<br>They are located in 178 countries across the World and categorized into <em>Natural, Cultural</em> and <em>Mixed</em> heritage sites. <br>In order to learn more about them, choose a category and click the button!
+					<h5>Each marker  below represents a World Heritage Site.<br>They are located in 178 countries across the World and categorized into
+						<em>Natural, Cultural</em> and <em>Mixed</em> heritage sites. <br>In order to learn more about them, choose a category and click the button!
                     </h5>
-                </div>
+				</div>
 			</div>
 			<div class="row no-gutters search-criteria">
 				<div class="col">
@@ -52,54 +53,54 @@
 				</div>
 			</div>
 			<div class="row no-gutters search-criteria ">
-            <!---source: https://www.w3schools.com/tags/att_input_type_radio.asp>--->
-		        <div class="col-sm ">
-                    <form class="special-radio">
-                        <label><input type="radio" id="natural" name="markerGroups" value="natural" >Natural sites</label><br>
-                        <label><input type="radio" id="cultural" name="markerGroups" value="cultural">Cultural sites</label><br>
-                        <label><input type="radio" id="mixed" name="markerGroups" value="mixed">Mixed Sites (both of natural and cultural importance)</label><br>
-                        <label><input type="radio" id="all" name="markerGroups" value="*" checked/> Show all</label><br>
+				<!--source: https://www.w3schools.com/tags/att_input_type_radio.asp>-->
+				<div class="col-sm ">
+					<form class="special-radio">
+						<label><input type="radio" id="natural" name="markerGroups" value="natural" >Natural sites</label><br>
+						<label><input type="radio" id="cultural" name="markerGroups" value="cultural">Cultural sites</label><br>
+						<label><input type="radio" id="mixed" name="markerGroups" value="mixed">Mixed Sites (both of natural and cultural importance)</label><br>
+						<label><input type="radio" id="all" name="markerGroups" value="*" checked/> Show all</label><br>
                     </form>
-		        </div>
-            </div>
-            <div class="row no-gutters search-criteria">
-                <div class="col-sm">
-                    <!-- <button type="button" class="btn btn-primary" onclick="initMap()">Show on map</button> -->
-                </div>
+				</div>
 			</div>
-        </section>
-        <section class="container-fluid">
-			<div id="map">
+			<div class="row no-gutters search-criteria">
+				<div class="col-sm">
+				</div>
 			</div>
 		</section>
-        <section id="syndication" class="container-fluid">
-            <div id="">
-            <p>
-            Copyright © 1992 - 2020 UNESCO/World Heritage Centre. All rights reserved.
-            </p>
-        </div>
-        </section> 
-
-    <footer class="container-fluid">
+		<div class="container-fluid">
+			<div id="map">
+			</div>
+		</div>
+		<section id="syndication" class="container-fluid">
+			<h6>Disclaimer</h6>
+			<div>
+				<p>
+					Copyright © 1992 - 2020 UNESCO/World Heritage Centre. All rights reserved.
+				</p>
+			</div>
+		</section>
+	</main>
+	<footer class="container-fluid">
 		<div class="row no-gutters align-items-center">
 			<div class="col-sm">
 				<a id="icons-ref" href="https://icons8.com/icon/79894/unesco">icons by Icons8</a>
 			</div>
 			<div class="col-sm  social">
 				<a target="_blank" rel="noopener" href="https://www.instagram.com/unescoworldheritage/">
-					<img src="https://img.icons8.com/cute-clipart/64/000000/instagram-new.png"/>
+					<img src="https://img.icons8.com/cute-clipart/64/000000/instagram-new.png" alt="link to Instagram">
 					<span class="sr-only">Instagram</span>
 				</a>
 				<a target="_blank" rel="noopener" href="https://www.tripadvisor.co.uk/">
-					<img src="https://img.icons8.com/color/48/000000/tripadvisor.png"/>
+					<img src="https://img.icons8.com/color/48/000000/tripadvisor.png" alt="link to Tripadvisor">
 					<span class="sr-only">Tripadvisor</span>
 				</a>
 				<a target="_blank" rel="noopener" href="http://whc.unesco.org/">
-					<img src="https://img.icons8.com/nolan/64/unesco.png"/>
+					<img src="https://img.icons8.com/nolan/64/unesco.png" alt="link to Unesco">
 					<span class="sr-only">UNESCO</span>
 				</a>
 				<a target="_blank" rel="noopener" href="https://www.google.com">
-					<img src="https://img.icons8.com/cute-clipart/64/000000/google-logo.png"/>
+					<img src="https://img.icons8.com/cute-clipart/64/000000/google-logo.png" alt="link to Google">
 					<span class="sr-only">Google</span>
 				</a>
 			</div>
@@ -108,22 +109,19 @@
 			</div>
 		</div>
 	</footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	</script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 	</script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
 	</script>
-      <script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
-    </script>
+	<script src="https://unpkg.com/@google/markerclustererplus@5.1.0/dist/markerclustererplus.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.12.0/lodash.min.js"></script>
 	<script src="https://unpkg.com/lowdb@0.17.1/dist/low.min.js"></script>
 	<script src="https://unpkg.com/lowdb@0.17.1/dist/LocalStorage.min.js"></script>
-    <script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSYJ2guMpg1PY9L3f3Oa94Ox-Ez4A9nEc">
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSYJ2guMpg1PY9L3f3Oa94Ox-Ez4A9nEc">
 	</script>
 	<script type="module" src="assets/script.js" crossorigin="anonymous"></script>
 </body>
