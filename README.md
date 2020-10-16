@@ -49,13 +49,13 @@ The website consists of 2 pages:
 ### Skeleton
 Wireframes
 
-![Homepage](/assets/images/Home.png "Homepage on large screen size")
+[Homepage](/assets/images/Home.png "Homepage on large screen size")
 
-![Homepage on mobile](/assets/images/Home_mobile.png "Homepage on small screen size")
+[Homepage on mobile](/assets/images/Home_mobile.png "Homepage on small screen size")
 
-![Map page](/assets/images/Map.png "Map on large screen size")
+[Map page](/assets/images/Map.png "Map on large screen size")
 
-![Map on mobile](/assets/images/Map_mobile.png "Map on small screen size")
+[Map on mobile](/assets/images/Map_mobile.png "Map on small screen size")
 
 ### Surface
 
@@ -143,15 +143,15 @@ UNESCO kindly gave their permission to use their XML data available on their 
 
 ## Media
 
-Image source: ![Pexels](https://www.pexels.com/)
+Image source: [Pexels](https://www.pexels.com/)
 
-Fonts from ![Google Fonts](https://fonts.google.com/)
+Fonts from [Google Fonts](https://fonts.google.com/)
 
-Icons by ![Icons8](https://icons8.com/)
+Icons by [Icons8](https://icons8.com/)
 
-Maps API by ![Google Maps](https://cloud.google.com/maps-platform/)
+Maps API by [Google Maps](https://cloud.google.com/maps-platform/)
 
-Map styling from ![Snazzymaps](https://snazzymaps.com/)
+Map styling from [Snazzymaps](https://snazzymaps.com/)
 
 ## Acknowledgements
 
