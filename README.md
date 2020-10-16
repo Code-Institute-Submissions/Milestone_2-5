@@ -66,8 +66,6 @@ On small viewports the image is hidden and replaced by the WHC logo and the menu
 
 ![Homepage screenshot1](/assets/images/home1.png "Homepage screenshots") 
 
-![Homepage screenshot2](/assets/images/home2.png "Homepage screenshots2")
-
 ![Homepage screenshot3](/assets/images/home3.PNG "Homepage screenshots3")
 
 The map page has the same header and footer as the home page. The body is divided into two parts: the search feature with the radio buttons and the map itself. The map has unique styling and colour scheme that highlights points of interests and transport links and the markers have been replaced by the Unesco logo.
@@ -77,7 +75,7 @@ On small viewports the contents shrink to fit the viewport and aligns to the cen
 
 ![Map screenshot2](/assets/images/map_smallview.PNG "Map screenshot small viewport")
 
-![Map screenshot3](/assets/images/map_smallview2PNG "Map screenshot small viewport2")
+![Map screenshot3](/assets/images/map_smallview2.PNG "Map screenshot small viewport2")
 
 
 ## User stories
