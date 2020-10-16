@@ -213,16 +213,16 @@ function initMap(data, filteredData) {
 
    if ($("#natural").is(":checked")) {
         locations = filteredData.locationsNatural;
-     };
+     }
     if ($("#cultural").is(":checked")) {
          locations = filteredData.locationsCultural;
-    };
+    }
      if ($("#mixed").is(":checked")) {
          locations = filteredData.locationsMixed;
-    };
+    }
     if ($("#all").is(":checked")) {
          locations = filteredData.locationsMixed.concat(filteredData.locationsCultural, filteredData.locationsNatural);
-     };
+     }
 
     const contentString = '';
 

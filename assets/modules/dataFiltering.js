@@ -24,7 +24,7 @@ function filterData(data) {
         locationsNatural,
         locationsCultural,
         locationsMixed
-    }
+    };
 }
 //exporting module contents to script.js
 export{filterData};
