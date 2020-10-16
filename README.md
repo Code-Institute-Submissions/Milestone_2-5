@@ -130,8 +130,13 @@ LowDB to create local database.
 Google Maps API
 
 ## Testing
+
 ### Testing in different browsers
+
+The website works as intended in Chrome,Mozilla and Microsoft Edge, on mobile it works on Chrome for Android.
+
 ### Testing against the user stories
+
 1.  User 1 can browse the entire map and check each information displayed when hovering over with the mouse  to see which one is of interest to them.
 
 ![Map screenshot2](/assets/images/marker.png "Map screenshot1 User1")
@@ -159,6 +164,7 @@ JavaScript validation: https://jshint.com/ was used to check the JavaScript code
 2. Google maps infowindow's contents were not displaying the correct information, used each location's id number to access the required data string.
 
 ## Deployment
+
 I started building the HTML of the website and did the styling using CSS on Repl.it then created the repository https://github.com/KittiKovacs/Milestone_2 on GitHub where I created the file structure and added the code created on the Repl.it platform.
 I commited important development stages and any progress by using git commit and pushed them to the master branch.
 As a next step I published the website on GitHub pages at https://kittikovacs.github.io/Milestone_2/ .
