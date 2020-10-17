@@ -1,11 +1,11 @@
 # Milestone_2
 ## WonderList
 
-An interactive website utilizing the Google Maps API, Javascript,Jquery and data in XML format from UNESCO. The website enables users to find all 1121 World Heritage Sites, find out more information about them and plan their visit.
+An interactive website utilizing the Google Maps API, Javascript, Jquery and data in XML format from UNESCO. The website enables users to find all 1121 World Heritage Sites, find out more information about them and plan their visit.
 
 ## My aim with the project
 
-I wanted to learn how to use Google Maps for something interesting, and while looking for ideas I came across UNESCO's World Heritage website. I found it a bit clumsy and overwhelming so I wanted to create a concise and user-friendly map to make these remarkable places known to a wider audience as I found the map on.
+I wanted to learn how to use Google Maps for something interesting, and while looking for ideas I came across UNESCO's World Heritage website. I found it a bit clumsy and overwhelming so I wanted to create a concise and user-friendly map to make these remarkable places known to a wider audience.
 
 ### External user's goal
 
@@ -23,9 +23,11 @@ To help others finding new travel destinations and learn more about the world.
 
 ## UX
 ### Strategy
+
 To present a large number and type of data from an external source on Google Maps in a visually appealing and informative way.
 
 ### Scope
+
 Within the scope of the project I have an interactive map that displays markers based on latitude and longitude data from the database.
 On moving the mouse over a marker it should display information in an infowindow and contain a link to an external site.
 On clicking on the marker/marker cluster the map focuses on the selected elements.
@@ -40,6 +42,7 @@ This map is filtered by the type of the location; this is achieved by using radi
 - Image gallery as the UNESCO website already contains these and the links in the footer point to social media sites like Instagram which is more suitable for this purpose.
 
 ### Structure
+
 The website consists of 2 pages:
 
 - Homepage: gives the user a short introduction to the purpose of the website and the work of UNESCO. It contains a copyright notice from UNESCO and features a footer with social media links and reference to Icons8.
@@ -47,6 +50,7 @@ The website consists of 2 pages:
 - Map page: features the map with a marker for each site and an option for the user to filter them by the type of the site. It also features the same footer and links as the Home page.
 
 ### Skeleton
+
 Wireframes
 
 ![Homepage](/assets/images/Home.png "Homepage on large screen size")
@@ -104,9 +108,9 @@ Another feature is the filtering of the markers, this is done by using the radio
 
 ![Map screenshot7](/assets/images/filter3.png "Features5")
 
-Header-contains navigation links and the website name. The navigation links change colour when they are active. By clicking on the website name the user is able to return to the main page from the map page.
+Header: Contains navigation links and the website name. The navigation links change colour when they are active. By clicking on the website name the user is able to return to the main page from the map page.
 
-Footer- Contains links to the social media pages of the UNESCO World Heritage Center and Google. Also contains copyright information.
+Footer: Contains links to the social media pages of the UNESCO World Heritage Center and Google. Also contains copyright information.
 
 ### Features left to implement
 
@@ -133,7 +137,7 @@ Google Maps API
 
 ### Testing in different browsers
 
-The website works as intended in Chrome,Mozilla and Microsoft Edge, on mobile it works on Chrome for Android.
+The website works as intended in Chrome, Mozilla and Microsoft Edge, on mobile it works on Chrome for Android. 
 
 ### Testing against the user stories
 
@@ -159,9 +163,9 @@ JavaScript validation: https://jshint.com/ was used to check the JavaScript code
 
 ## Problems encountered
 
-1. Large number of data used from external source, which caused delays in loading the site. This was overcome by creating local storage.
-2. Understanding and using the data structure was a challenge overall and proved to be the most time-consuming part of the process.
-2. Google maps infowindow's contents were not displaying the correct information, used each location's id number to access the required data string.
+1. Large number of data used from external source, which caused delays in loading the site. This was overcome by creating a local storage using LowDB.
+2. Understanding and using the data structure was a challenge overall and proved to be the most time-consuming part of the process. For example figuring out how to access and use latitude and longitude information I needed for creating the markers.
+2. Google maps infowindow's contents were not displaying the correct information. I used each location's id number as an identifier to access the required data string.
 
 ## Deployment
 
@@ -191,6 +195,6 @@ Map styling from [Snazzymaps](https://snazzymaps.com/)
 
 Many thanks for the permission to UNESCO to use their name, logo and data.
 
-My mentor Guido Cecilio Garcia Bernal had great suggestions and helped me manage the database.
+My mentor Guido Cecilio Garcia Bernal had great suggestions and helped me manage the data and structure my code better.
 
 Also a big thank you for the tutors at Code Institute especially Miklos and Johann.
